@@ -154,3 +154,182 @@ main {
     }
     
 }
+
+
+
+
+
+/* AUTHENTICATION */
+
+.btnRegister {
+    background-color: white;
+    border: 0.1px solid rgb(216, 216, 216);
+    border-radius: 3px;
+    box-shadow: 1px 1px 2px grey;
+    font-size: small;
+    font-weight: 600;
+    color: rgb(84, 84, 84);
+    padding: 7px 15px;
+    width: 100px;
+    align-items: center;
+    margin-left: 12px;
+}
+
+.btnRegister:hover {
+    cursor: pointer;
+    background-color: rgb(235, 235, 235);
+}
+
+.btnLogin {
+    background-color: blue;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 1px 1px 2px grey;
+    font-size: small;
+    font-weight: 600;
+    color: white;
+    padding: 7px 15px;
+    width: 100px;
+    align-items: center;
+    margin-left: 12px;
+}
+
+.btnLogin:hover {
+    cursor: pointer;
+    background-color: rgb(0, 0, 223);
+}
+
+.btnLogout {
+    background-color: red;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 1px 1px 2px grey;
+    font-size: small;
+    font-weight: 600;
+    color: white;
+    padding: 7px 15px;
+    width: 100px;
+    align-items: center;
+    margin-left: 5px;
+}
+
+.btnLogout:hover {
+    cursor: pointer;
+    background-color: rgb(235, 0, 0);
+}
+
+
+#message {
+    font-size: small;
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 0;
+    margin-bottom: 8.5px;
+}
+
+.divPopup {
+    display: flex;
+    background-color: rgba(99, 99, 99, 0.438);
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    opacity: 0;
+}
+
+.show {
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.divInside {
+    background-color: white;
+    border-radius: 5px;
+    width: 600px;
+    max-width: 100%;
+    padding: 0px 20px 30px 20px;
+    text-align: center;
+}
+
+.headExit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titleRegister {
+    flex-grow: 1;
+    text-align: center;
+    margin-left: 30px;
+    margin-top: 30px;
+}
+
+.btnExit {
+    background-color: red;
+    border: none;
+    border-radius: 3px;
+    width: 30px;
+    height: 30px;
+    padding: 0px 0px;
+    margin-left: auto;
+}
+
+
+.btnExit:hover {
+    cursor: pointer;
+    background-color: rgb(222, 0, 0);
+}
+
+.cruz_exit {
+    width: 100%
+}
+
+#formRegister input,
+#formLogin input {
+    width: 50%;
+    height: 30px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#formRegister label,
+#formLogin label {
+    font-weight: 500;
+    font-size: medium;
+}
+
+#formRegister input[type="submit"] {
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: medium;
+    font-weight: 500;
+    margin-top: -10px;
+    height: 40px;
+}
+
+#formLogin input[type="submit"] {
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: medium;
+    font-weight: 500;
+    margin-top: 10px;
+    height: 40px;
+}
+
+#formRegister input[type="submit"]:hover,
+#formLogin input[type="submit"]:hover {
+    background-color: rgb(0, 0, 232);
+    cursor: pointer;
+}
+
+#linkRegister {
+    font-size: small;
+}

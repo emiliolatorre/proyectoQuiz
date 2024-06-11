@@ -1,5 +1,13 @@
 const contenedorPreguntas = document.querySelector('.contenedorPreguntas');
 const fragment = document.createDocumentFragment();
+const btnRegister = document.querySelector('#btnRegister');
+const btnLogin = document.querySelector('#btnLogin');
+const btnLogout = document.querySelector('#btnLogout');
+const btnExitLogin = document.querySelector('#btnExitLogin');
+const btnExitRegister = document.querySelector('#btnExitRegister');
+const enviarResultados = document.querySelector('#enviarResultados');
+const divLoginContainer = document.querySelector('#divLogin-container');
+const divRegisterContainer = document.querySelector('#divRegister-container');
 
 const getQuestions = async () => {
     try {
@@ -20,7 +28,7 @@ const getQuestions = async () => {
 };
 
 const pintarQuestions = (arr) => {
-    arr.forEach((element, index)=> {
+    arr.forEach((element, index) => {
         const card = document.createElement('article');
         //esto
         card.classList.add('cardPreguntas')
@@ -28,20 +36,20 @@ const pintarQuestions = (arr) => {
         contenedorOptions.setAttribute('id', 'contenedorOptions')
         const question = document.createElement('h4');
         const category = document.createElement('h5');
-        const option1 = document.createElement('button'); 
+        const option1 = document.createElement('button');
         //
-        option1.classList.add('option1','respuestaBtn')
+        option1.classList.add('option1', 'respuestaBtn')
         const option2 = document.createElement('button');
         //
-        option2.classList.add('option2','respuestaBtn')
+        option2.classList.add('option2', 'respuestaBtn')
         const option3 = document.createElement('button');
         //
-        option3.classList.add('option3','respuestaBtn')
+        option3.classList.add('option3', 'respuestaBtn')
         const option4 = document.createElement('button');
         //
-        option4.classList.add('option4','respuestaBtn')
+        option4.classList.add('option4', 'respuestaBtn')
         const next = document.createElement('button');
-        next.textContent='Next' //
+        next.textContent = 'Next' //
         next.classList.add('nextBtn')// 
         //(option1, option2, option3, option4).classList.add('respuestaBtn');
         next.classList.add('nextBtn');
@@ -50,7 +58,7 @@ const pintarQuestions = (arr) => {
         const incorrectAnswersArr = element.incorrect_answers;
         shuffle(incorrectAnswersArr, element.correct_answer);
         console.log(element.incorrect_answers);
-        
+
         // option1.textContent = element.incorrect_answers[0];
         // option2.textContent = element.incorrect_answers[1];
         // option3.textContent = element.incorrect_answers[2];
@@ -69,11 +77,6 @@ const shuffle = (arr, correctAnswer) => {
 
 getQuestions();
 
-
-
-
-
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyAuLH-B5suV6RhxfnuTiEGwZkXW4aGSVz8",
@@ -87,15 +90,56 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);// Inicializaar app Firebase
 const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
-
-
-
-
-
-
+const auth = firebase.auth();
 
 
 //****** AUTHENTICATION ******
+
+document.addEventListener('click', (event) => {
+
+    if (event.target.matches('#btnRegister')) {
+        divRegisterContainer.classList.add('show');
+    }
+
+    if (event.target.matches('#btnExitRegister')) {
+        divRegisterContainer.classList.remove('show')
+    }
+
+    if (event.target.matches('#btnLogin')) {
+        divLoginContainer.classList.add('show');
+    }
+
+    if (event.target.matches('#btnExitLogin')) {
+        divLoginContainer.classList.remove('show')
+    }
+
+    if (event.target.matches('#linkRegister')) {
+        divLoginContainer.classList.remove('show');
+        divRegisterContainer.classList.add('show');
+    }
+
+    if (event.target.matches('#btnLogout')) {
+        signOut();
+        // Stats.style.display = 'none';
+        // Score.style.display = 'none';
+    }
+});
+
+document.getElementById("formLogin").addEventListener("submit", function (event) {
+    event.preventDefault();
+    let email = event.target.elements.email2.value;
+    let pass = event.target.elements.pass3.value;
+    signInUser(email, pass)
+});
+
+document.getElementById("formRegister").addEventListener("submit", function (event) {
+    event.preventDefault();
+    let email = event.target.elements.email.value;
+    let pass = event.target.elements.pass.value;
+    let pass2 = event.target.elements.pass2.value;
+
+    pass === pass2 ? signUpUser(email, pass) : alert("error password");
+});
 
 const createUser = (user) => {
     db.collection("quiz")
@@ -111,30 +155,19 @@ const signUpUser = (email, password) => {
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-            // Signed in
             let user = userCredential.user;
             console.log(`se ha registrado ${user.email} ID:${user.uid}`)
-            // Saves user in firestore
             createUser({
                 id: user.uid,
                 email: user.email
             });
-            //(BOTONESLOGIN/REGISTER).classList.remove('show')
+            divRegisterContainer.classList.remove('show')
 
         })
         .catch((error) => {
             console.log("Error en el sistema" + error.message, "Error: " + error.code);
         });
 };
-
-document.getElementById("formRegister").addEventListener("submit", function (event) {
-    event.preventDefault();
-    let email = event.target.elements.email.value;
-    let pass = event.target.elements.pass.value;
-    let pass2 = event.target.elements.pass2.value;
-
-    pass === pass2 ? signUpUser(email, pass) : alert("error password");
-});
 
 const signInUser = (email, password) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
@@ -143,7 +176,7 @@ const signInUser = (email, password) => {
             let user = userCredential.user;
             console.log(`se ha logado ${user.email} ID:${user.uid}`);
             console.log("USER", user);
-            //(BOTONESLOGIN/REGISTER).classList.remove('show')
+            divLoginContainer.classList.remove('show');
         })
         .catch((error) => {
             let errorCode = error.code;
@@ -166,37 +199,12 @@ const signOut = () => {
     });
 };
 
-document.getElementById("formLogin").addEventListener("submit", function (event) {
-    event.preventDefault();
-    let email = event.target.elements.email2.value;
-    let pass = event.target.elements.pass3.value;
-    signInUser(email, pass)
-});
-
-document.getElementById("salir").addEventListener("click", function (event) {
-    signOut();
-    titleLista.innerHTML = '';
-    containerListas.innerHTML = '';
-    sectionFiltrosIndex.style.display = 'flex';
-    sectionFiltrosBooks.style.display = 'none';
-    currentPage = 1;
-    divPage.style.display = 'none'
-    getIndex(`${urlIndex}`)
-        .then((resp) => {
-            const indexArray = resp.results
-            printIndex(indexArray)
-        })
-        .catch((error) => { console.error(error) })
-});
 
 // Listener de usuario en el sistema
-// Controlar usuario logado
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         console.log(`Está en el sistema:${user.email} ${user.uid}`);
         document.getElementById("message").innerText = `¡Bienvenido ${user.email}!`;
-
-        btnFavPrint.style.display = 'flex'
 
         divLogout.style.display = 'block'
         btnRegister.style.display = 'none'
@@ -212,55 +220,40 @@ firebase.auth().onAuthStateChanged(function (user) {
     }
 });
 
+// resultado de prueba
+const resultado = {
+    aciertos: 9,
+    score: 80
+}
+
 document.addEventListener('click', async (event) => {
     const user = firebase.auth().currentUser;
 
-    if (event.target.classList.contains('btnFav')) {
-
-        if (user) {
-            const bookData = JSON.parse(event.target.id);
-            addBookFav(user.uid, bookData);
-            event.target.classList.remove('btnFav');
-            event.target.classList.add('btnFav2');
-            event.target.querySelector('img').src = 'assets/favorito2.png';
-
-        } else {
-            divLoginContainer.classList.add('show');
-        }
-
-    } else if (event.target.classList.contains('btnFav2')) {
-        if (user) {
-            const bookData = JSON.parse(event.target.id);
-            removeBookFav(user.uid, bookData);
-            event.target.classList.remove('btnFav2');
-            event.target.classList.add('btnFav');
-            event.target.querySelector('img').src = 'assets/favorito.png';
-        } else {
-            divLoginContainer.classList.add('show');
-        }
+    if (event.target.matches('#enviarResultados')) {
+        console.log('funciona')
+        addPuntuación(user.uid, resultado);
     }
+
+    // TODO crear botones para ver stats y score (solo visibles cuando user logeado), e incluir evento
+    // else if (event.target.classList.contains('btnStats')) {
+
+    //     if (user) {
+    //         pintarStats()
+
+    //     } else {
+    //     }
+
+    // } else if (event.target.classList.contains('btnScores')) {
+    //     if (user) {
+    //         pintarScore()
+    //     } else {
+    //     }
+    // }
 });
 
-
-
-
 //****** FIRESTORE DB ******
-// Almacena la puntuación de cada partida en Firebase Firestore. Guardar puntuación y fecha en cada objeto
-/* Modelo de datos:
-- collection: puntuaciones
-- documento: cada usuario
-- data: [
-{
-nombre:
-email:
-puntuaciones: [
-{puntuación: correct, incorrect, correct, incorrect, correct, correct, incorrect, correct, incorrect, correct},
-{puntuación2},
-{puntuación3}
-]
-*/
 
-const addPuntuación = (uid, puntuacion) => {
+const addPuntuación = (uid, resultado) => {
     db.collection("quiz").where("id", "==", uid)
         .get()
         .then((docs) => {
@@ -268,9 +261,9 @@ const addPuntuación = (uid, puntuacion) => {
                 const docId = doc.id;
                 const userRef = db.collection('quiz').doc(docId);
 
-                await userRef.update({ puntuaciones: firebase.firestore.FieldValue.arrayUnion(puntuacion) })
+                await userRef.update({ resultados: firebase.firestore.FieldValue.arrayUnion(resultado) })
                     .then(() => {
-                        alert('Puntuación registrada.')
+                        alert('Resultados registrados.')
                     })
                     .catch((error) => {
                         throw `Error registrando la puntuación: ${error}`;
@@ -282,28 +275,4 @@ const addPuntuación = (uid, puntuacion) => {
         });
 };
 
-
-// Evento
-
-document.addEventListener('click', async (event) => {
-    if (event.target.matches('#btnFavPrint')) {
-        const user = firebase.auth().currentUser;
-        db.collection("users").where("id", "==", user.uid)
-            .get()
-            .then((docs) => {
-                docs.forEach((doc) => {
-                    const dataBooksToPrint = doc.data().favourites;
-                    printBooksFiltered(dataBooksToPrint)
-                })
-            })
-        btnAtrasBooks.style.display = 'flex';
-        btnAtras.style.display = 'none';
-
-        formTitulo.style.display = 'none';
-        formAutor.style.display = 'none';
-        selectAZAutor.style.display = 'none';
-
-        currentPage = 1;
-    }
-});
 
