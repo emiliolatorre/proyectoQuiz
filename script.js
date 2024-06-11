@@ -34,10 +34,14 @@ const pintarQuestions = (arr) => {
         next.classList.add('nextBtn');
         question.textContent = `${index + 1}. ${element.question}`;
         category.textContent = element.category;
-        option1.textContent = element.incorrect_answers[0];
-        option2.textContent = element.incorrect_answers[1];
-        option3.textContent = element.incorrect_answers[2];
-        option4.textContent = element.incorrect_answers[3];
+        const incorrectAnswersArr = element.incorrect_answers;
+        shuffle(incorrectAnswersArr, element.correct_answer);
+        console.log(element.incorrect_answers);
+        
+        // option1.textContent = element.incorrect_answers[0];
+        // option2.textContent = element.incorrect_answers[1];
+        // option3.textContent = element.incorrect_answers[2];
+        // option4.textContent = element.incorrect_answers[3];
         contenedorOptions.append(option1, option2, option3, option4);
         card.append(question, category, contenedorOptions, next);
         fragment.append(card);
@@ -45,5 +49,9 @@ const pintarQuestions = (arr) => {
     contenedorPreguntas.append(fragment);
 };
 
+const shuffle = (arr, correctAnswer) => {
+    const random = Math.floor(Math.random() * arr.length);
+    return arr.splice(random, 0, correctAnswer);
+};
 
 getQuestions();
