@@ -275,4 +275,3 @@ const addPuntuación = (uid, resultado) => {
         });
 };
 
-
