@@ -159,7 +159,8 @@ const signUpUser = (email, password) => {
             console.log(`se ha registrado ${user.email} ID:${user.uid}`)
             createUser({
                 id: user.uid,
-                email: user.email
+                email: user.email,
+                resultados: []
             });
             divRegisterContainer.classList.remove('show')
 
@@ -191,14 +192,10 @@ const signOut = () => {
 
     firebase.auth().signOut().then(() => {
         console.log("Sale del sistema: " + user.email);
-        btnFavPrint.style.display = 'none';
-        btnAtrasBooks.style.display = 'none';
-        btnAtras.style.display = 'flex';
     }).catch((error) => {
         console.log("hubo un error: " + error);
     });
 };
-
 
 // Listener de usuario en el sistema
 firebase.auth().onAuthStateChanged(function (user) {
@@ -221,8 +218,8 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 // resultado de prueba
-const resultado = {
-    aciertos: 9,
+const nuevoResultado = {
+    aciertos: 10,
     score: 80
 }
 
@@ -231,7 +228,8 @@ document.addEventListener('click', async (event) => {
 
     if (event.target.matches('#enviarResultados')) {
         console.log('funciona')
-        addPuntuación(user.uid, resultado);
+        addPuntuación(user.uid, nuevoResultado);
+        console.log('funciona2')
     }
 
     // TODO crear botones para ver stats y score (solo visibles cuando user logeado), e incluir evento
@@ -253,7 +251,7 @@ document.addEventListener('click', async (event) => {
 
 //****** FIRESTORE DB ******
 
-const addPuntuación = (uid, resultado) => {
+const addPuntuación = (uid, nuevoResultado) => {
     db.collection("quiz").where("id", "==", uid)
         .get()
         .then((docs) => {
@@ -261,15 +259,22 @@ const addPuntuación = (uid, resultado) => {
                 const docId = doc.id;
                 const userRef = db.collection('quiz').doc(docId);
 
-                await userRef.update({ resultados: firebase.firestore.FieldValue.arrayUnion(resultado) })
-                    .then(() => {
-                        alert('Resultados registrados.')
-                    })
-                    .catch((error) => {
-                        throw `Error registrando la puntuación: ${error}`;
-                    });
-            });
-        })
+                try {
+                    // Leer el documento actual
+                    const docSnapshot = await userRef.get();
+                    const datos = docSnapshot.data();
+                    const resultados = datos.resultados || [];
+
+                    // Agregar el nuevo resultado al array
+                    resultados.push(nuevoResultado);
+
+                    // Actualizar el array en Firestore
+                    await userRef.update({ resultados: resultados });
+                    alert('Resultados registrados.');
+                } catch (error) {
+                    console.error(`Error registrando la puntuación: ${error}`);
+                }
+        })})
         .catch((error) => {
             alert(error);
         });
