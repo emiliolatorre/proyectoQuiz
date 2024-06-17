@@ -14,69 +14,96 @@
 <body>
     <header>
         <h2>Quiz</h2>
+        <img class='volumen' src="assets/mute.png">
     </header>
-    <main>
+    <main id="mainBienvenida">
         <section class="contenedorBienvenida">
-            <article class="contenedorTriggerPreguntas">
+                <!-- AUTH btn login -->
+          <article class="contenedorTriggerPreguntas">
                 <h3>Welcome to the Quiz!</h3>
                 <a href="/pages/questions.html">
                     <button class="triggerQuestionsBtn">Take the Quiz</button>
                 </a>
             </article>
+            <article class="contenedorGraficas hidden">
+              <canvas id="graficaResultados">
+
+                </canvas>
+            </article>
+            <div id="divLogin">
+                    <button id="btnRegister" class="btnRegister">Register</button>
+                    <button id="btnLogin" class="btnLogin">Login</button>
+                    <div id="divLogout">
+                        <button id="btnLogout" class="btnLogout">Logout</button>
+                        <p id="message"></p>
+                    </div>
+                    <button id="enviarResultados">Enviar resultados</button>
+            </div>
         </section>
-        <section class="contenedorBienvenida2">
-            <article class="contenedorNavBtns">
-                <button class="goToLogin">Accede a tu cuenta</button>
-                <button class="goToRegister">¿Eres nuevo?</button>
-                <button class="goToStats hidden">Stats</button>
-                <button class="goToScoreboard hidden">ScoreBoard</button>
-            </article>
-            <article class="hidden">G</article>
-            <article class="hidden">SB</article>
-            <article class="contenedorLoginAndStats">
-                <article class="loginContainer">
-                    <form id="loginForm" action="#" method="POST">
-                        <h4>Log In:</h4>
-                        <div class="inputContainer">
-                            <i class="fa fa-envelope icon"></i>
-                            <input class="inputField" type="email" id="emailLogin" name="emailLogin"
-                                placeholder="Email">
+
+        <!-- AUTH popups login -->
+
+        <section>
+            <div id="forms-container">
+                <div id="divRegister-container" class="divPopup">
+                    <div id="divRegister" class="divInside">
+                        <div class="headExit">
+                            <h3 class="titleRegister">Formulario de Registro</h3>
+                            <button id="btnExitRegister" class="btnExit">
+                                <img class="cruz_exit" src="assets\cruz_exit.png" alt="cruz"
+                                    style="pointer-events: none;">
+                            </button>
                         </div>
-                        <div class="inputContainer">
-                            <i class="fa fa-key icon"></i>
-                            <input class="inputField" type="password" id="passLogin" name="passLogin"
-                                placeholder="Password">
+                        <form id="formRegister" action="#" method="POST">
+                            <div>
+                                <input type="email" id="email" name="email" placeholder="Introduce email..."><br>
+                                <input type="password" id="pass" name="pass" placeholder="Introduce password..."><br>
+                                <input type="password" id="pass2" name="pass2" placeholder="Repite password..."><br><br>
+                                <input type="submit" value="Enviar">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="divLogin-container" class="divPopup">
+                    <div id="divLogin" class="divInside">
+                        <div class="headExit">
+                            <h3 class="titleRegister">Formulario de Login</h3>
+                            <button id="btnExitLogin" class="btnExit">
+                                <img class="cruz_exit" src="assets\cruz_exit.png" alt="cruz"
+                                    style="pointer-events: none;">
+                            </button>
                         </div>
-                        <input class="submitBtn" type="submit" value="Log In">
-                    </form>
-                    <button class="closeFormBtn" id="closeFormBtn">Close</button>
-                </article>
-                <article class="signupContainer">
-                    <h4>Register:</h4>
-                    <form id="signUpForm" action="#" method="POST">
-                        <div class="inputContainer">
-                            <i class="fa fa-envelope icon"></i>
-                            <input class="inputField" type="email" id="emailSignup" name="emailSignup"
-                                placeholder="Email">
-                        </div>
-                        <div class="inputContainer">
-                            <i class="fa fa-key icon"></i>
-                            <input class="inputField" type="password" id="passSignup" name="passSignup"
-                                placeholder="Password">
-                        </div>
-                        <div class="inputContainer">
-                            <i class="fa fa-key icon"></i>
-                            <input class="inputField" type="password" id="passSignupRepeat" name="passSignupRepeat"
-                                placeholder="Repeat Password">
-                        </div>
-                        <input class="submitBtn" type="submit" value="Register">
-                    </form>
-                    <button class="closeFormBtn" id="closeFormBtn">Close</button>
-                </article>
-            </article>
+                        <form id="formLogin" action="#" method="POST">
+                            <div>
+                                <input type="email" id="email2" name="email2" placeholder="Introduce email..."><br>
+                                <input type="password" id="pass3" name="pass3" placeholder="Introduce password..."><br>
+                                <input type="submit" value="Enviar">
+                            </div>
+                        </form>
+                        <button id="btnGoogle" onclick="loginGoogle()">Login with Google</button>
+                        <a href="#" id="linkRegister">Si aún no estás registrado, clika aquí</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+  
+  <section class="contenedorGraficas">
+            <div>
+                
+            </div>
         </section>
     </main>
     <footer></footer>
+  <audio class="musicaFondo" loop>
+        <source src="assets/musicaPagina.mp3" type="audio/mpeg">
+    </audio>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
+
     <script src="script.js"></script>
 </body>
 
