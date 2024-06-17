@@ -15,9 +15,11 @@ header {
 
 main {
     display: flex;
+    justify-content: center;
     background-color: rgb(193, 224, 237);
-    padding-left: auto;
-    padding-right: auto;
+    /* padding-left: auto;
+    padding-right: auto; */
+    padding: 18px;
 }
 
 .cardPreguntas {
@@ -31,14 +33,22 @@ main {
     height: 600px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
 }
 
-.respuestaBtn {
+.optionBtn {
     border-radius: 5px;
     width: 100%;
     height: 70px;
-    color: white;
+    color: black;
+}
+
+.optionBtn:hover {
+    /* border-radius: 5px;
+    width: 100%;
+    height: 70px;
+    color: black; */
+    border: 3px solid black;
+    font-weight: bold;
 }
 
 #contenedorOptions {
@@ -77,11 +87,115 @@ main {
     padding-left: 10px;
 }
 
+.hidden {
+    display: none !important;
+}
+
+/* Maquetación auth con pop-up*/
+.loginContainer,
+.signupContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    pointer-events: none;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    height: 50vh;
+    width: 50vw;
+    top: 50%;
+    left: 50%;
+    margin-top: -25vh;
+    margin-left: -25vw;
+    padding: 10px;
+    gap: 30px;
+    border-radius: 10px;
+}
+
+.loginContainer h4,
+.signupContainer h4 {
+    align-self: center;
+}
+
+.inputContainer {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.signupContainer .icon,
+.loginContainer .icon {
+    padding: 10px;
+    background: dodgerblue;
+    color: white;
+    min-width: 50px;
+    text-align: center;
+}
+
+.inputField {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+}
+
+.inputField:focus {
+    border: 2px solid dodgerblue;
+}
+
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    height: 100%;
+}
+
+#signUpForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#closeFormBtn {
+    justify-self: center;
+    width: 33%;
+
+}
+
+.contenedorLoginAndStats button,
+.submitBtn {
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    border: 1px solid dodgerblue;
+}
+
+.contenedorLoginAndStats button:hover,
+.submitBtn:hover {
+    border: 3px solid dodgerblue;
+    color: dodgerblue;
+}
+
+.show {
+    pointer-events: auto;
+    opacity: 1;
+}
+
 @media (min-width: 800px) {
     main {
         margin-left: auto;
         margin-right: auto;
     }
+
     .cardPreguntas {
         display: flex;
         flex-direction: column;
@@ -96,6 +210,7 @@ main {
         margin-top: 30px;
         align-self: center;
     }
+
     .respuestaBtn {
         border-radius: 5px;
         width: 100%;
@@ -114,6 +229,7 @@ main {
         margin-left: auto;
         margin-right: auto;
     }
+
     .cardPreguntas {
         display: flex;
         background-color: white;
@@ -142,6 +258,7 @@ main {
         margin-left: auto;
         margin-right: auto;
     }
+
     .nextBtn {
         background-color: rgb(28, 168, 224);
         border: rgb(28, 168, 224);
@@ -152,5 +269,5 @@ main {
         align-self: flex-end;
         margin-right: 50px;
     }
-    
+
 }

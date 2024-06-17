@@ -1,19 +1,83 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
     <header>
         <h2>Quiz</h2>
     </header>
     <main>
-        <section class="contenedorBienvenida"></section>
+        <section class="contenedorBienvenida">
+            <article class="contenedorTriggerPreguntas">
+                <h3>Welcome to the Quiz!</h3>
+                <a href="/pages/questions.html">
+                    <button class="triggerQuestionsBtn">Take the Quiz</button>
+                </a>
+            </article>
+        </section>
+        <section class="contenedorBienvenida2">
+            <article class="contenedorNavBtns">
+                <button class="goToLogin">Accede a tu cuenta</button>
+                <button class="goToRegister">¿Eres nuevo?</button>
+                <button class="goToStats hidden">Stats</button>
+                <button class="goToScoreboard hidden">ScoreBoard</button>
+            </article>
+            <article class="hidden">G</article>
+            <article class="hidden">SB</article>
+            <article class="contenedorLoginAndStats">
+                <article class="loginContainer">
+                    <form id="loginForm" action="#" method="POST">
+                        <h4>Log In:</h4>
+                        <div class="inputContainer">
+                            <i class="fa fa-envelope icon"></i>
+                            <input class="inputField" type="email" id="emailLogin" name="emailLogin"
+                                placeholder="Email">
+                        </div>
+                        <div class="inputContainer">
+                            <i class="fa fa-key icon"></i>
+                            <input class="inputField" type="password" id="passLogin" name="passLogin"
+                                placeholder="Password">
+                        </div>
+                        <input class="submitBtn" type="submit" value="Log In">
+                    </form>
+                    <button class="closeFormBtn" id="closeFormBtn">Close</button>
+                </article>
+                <article class="signupContainer">
+                    <h4>Register:</h4>
+                    <form id="signUpForm" action="#" method="POST">
+                        <div class="inputContainer">
+                            <i class="fa fa-envelope icon"></i>
+                            <input class="inputField" type="email" id="emailSignup" name="emailSignup"
+                                placeholder="Email">
+                        </div>
+                        <div class="inputContainer">
+                            <i class="fa fa-key icon"></i>
+                            <input class="inputField" type="password" id="passSignup" name="passSignup"
+                                placeholder="Password">
+                        </div>
+                        <div class="inputContainer">
+                            <i class="fa fa-key icon"></i>
+                            <input class="inputField" type="password" id="passSignupRepeat" name="passSignupRepeat"
+                                placeholder="Repeat Password">
+                        </div>
+                        <input class="submitBtn" type="submit" value="Register">
+                    </form>
+                    <button class="closeFormBtn" id="closeFormBtn">Close</button>
+                </article>
+            </article>
+        </section>
     </main>
     <footer></footer>
     <script src="script.js"></script>
 </body>
+
 </html>
