@@ -221,8 +221,8 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 // resultado de prueba
 const nuevoResultado = {
-    aciertos: 10,
-    score: 80
+    fecha: '2024-05-15',
+    aciertos: 5,
 }
 
 document.addEventListener('click', async (event) => {
@@ -304,7 +304,29 @@ const loginGoogle = () => {
         });
 };
 
+// no esta terminada, en proceso.
 // const getMayoresResultados = () => {
+//     const tableTitulo = document.createElement ('h3');
+//     tableTitulo.innerHTML = 'TOTAL SCORE RANKING';
+
+//     const table = document.createElement('table');
+//     table.id = 'tableScore';
+
+//     const tHead = document.createElement('thead');
+
+//     const trHead = document.createElement('tr');
+//     const th1 = document.createElemenet('th');
+//     th1.textContent = 'RANK';
+
+//     const th2 = document.createElemenet('th');
+//     th2.textContent = 'SCORE';
 
 
+//     const th3 = document.createElemenet('th');
+//     th3.textContent = 'NAME';
+
+//     const th4 = document.createElemenet('th');
+//     th4.textContent = 'COUNT';
+
+//     const tbody = document.createElement('tbody');
 // }
