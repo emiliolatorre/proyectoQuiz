@@ -15,20 +15,86 @@
         <img class='volumen' src="assets/mute.png">
     </header>
     <main id="mainBienvenida">
-        <section class="contenedorBienvenida"></section>
-        <section class="contenedorGraficas">
+        <section class="contenedorBienvenida">
+                <!-- AUTH btn login -->
+          
+                <div id="divLogin">
+                    <button id="btnRegister" class="btnRegister">Register</button>
+                    <button id="btnLogin" class="btnLogin">Login</button>
+                    <div id="divLogout">
+                        <button id="btnLogout" class="btnLogout">Logout</button>
+                        <p id="message"></p>
+                    </div>
+                    <button id="enviarResultados">Enviar resultados</button>
+                </div>
+        </section>
+
+        <!-- AUTH popups login -->
+
+        <section>
+            <div id="forms-container">
+                <div id="divRegister-container" class="divPopup">
+                    <div id="divRegister" class="divInside">
+                        <div class="headExit">
+                            <h3 class="titleRegister">Formulario de Registro</h3>
+                            <button id="btnExitRegister" class="btnExit">
+                                <img class="cruz_exit" src="assets\cruz_exit.png" alt="cruz"
+                                    style="pointer-events: none;">
+                            </button>
+                        </div>
+                        <form id="formRegister" action="#" method="POST">
+                            <div>
+                                <input type="email" id="email" name="email" placeholder="Introduce email..."><br>
+                                <input type="password" id="pass" name="pass" placeholder="Introduce password..."><br>
+                                <input type="password" id="pass2" name="pass2" placeholder="Repite password..."><br><br>
+                                <input type="submit" value="Enviar">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="divLogin-container" class="divPopup">
+                    <div id="divLogin" class="divInside">
+                        <div class="headExit">
+                            <h3 class="titleRegister">Formulario de Login</h3>
+                            <button id="btnExitLogin" class="btnExit">
+                                <img class="cruz_exit" src="assets\cruz_exit.png" alt="cruz"
+                                    style="pointer-events: none;">
+                            </button>
+                        </div>
+                        <form id="formLogin" action="#" method="POST">
+                            <div>
+                                <input type="email" id="email2" name="email2" placeholder="Introduce email..."><br>
+                                <input type="password" id="pass3" name="pass3" placeholder="Introduce password..."><br>
+                                <input type="submit" value="Enviar">
+                            </div>
+                        </form>
+                        <button id="btnGoogle" onclick="loginGoogle()">Login with Google</button>
+                        <a href="#" id="linkRegister">Si aún no estás registrado, clika aquí</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+  
+  <section class="contenedorGraficas">
             <div>
                 <canvas id="graficaResultados">
 
                 </canvas>
             </div>
         </section>
+
     </main>
     <footer></footer>
-    <audio class="musicaFondo" loop>
+  <audio class="musicaFondo" loop>
         <source src="assets/musicaPagina.mp3" type="audio/mpeg">
     </audio>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
+
     <script src="script.js"></script>
 </body>
 
