@@ -9,6 +9,7 @@ const enviarResultados = document.querySelector('#enviarResultados');
 const divLoginContainer = document.querySelector('#divLogin-container');
 const divRegisterContainer = document.querySelector('#divRegister-container');
 
+
 const getQuestions = async () => {
     try {
         const resp = await fetch('https://opentdb.com/api.php?amount=10');
@@ -91,6 +92,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);// Inicializaar app Firebase
 const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
 const auth = firebase.auth();
+const provider = new firebase.auth.GoogleAuthProvider();
 
 
 //****** AUTHENTICATION ******
@@ -274,9 +276,35 @@ const addPuntuación = (uid, nuevoResultado) => {
                 } catch (error) {
                     console.error(`Error registrando la puntuación: ${error}`);
                 }
-        })})
+            })
+        })
         .catch((error) => {
             alert(error);
         });
 };
 
+const loginGoogle = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider)
+        .then((result) => {
+            // Esto te da un token de acceso a Google.
+            const token = result.credential.accessToken;
+            // La información del usuario registrado.
+            const user = result.user;
+            console.log("Usuario logado con Google:", user);
+            divLoginContainer.classList.remove('show');
+        divRegisterContainer.classList.remove('show');
+        }).catch((error) => {
+            // Manejo de errores.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            const email = error.email;
+            const credential = error.credential;
+            console.error(`Error en login con Google: ${errorCode}, ${errorMessage}`);
+        });
+};
+
+// const getMayoresResultados = () => {
+
+
+// }
