@@ -9,6 +9,10 @@ const enviarResultados = document.querySelector('#enviarResultados');
 const divLoginContainer = document.querySelector('#divLogin-container');
 const divRegisterContainer = document.querySelector('#divRegister-container');
 
+const rightAudio = new Audio('assets/RightAudio.ogg');
+const wrongAudio = new Audio('assets/WrongAudio.ogg');
+
+/* 
 
 const getQuestions = async () => {
     try {
@@ -60,10 +64,11 @@ const pintarQuestions = (arr) => {
         shuffle(incorrectAnswersArr, element.correct_answer);
         console.log(element.incorrect_answers);
 
-        // option1.textContent = element.incorrect_answers[0];
-        // option2.textContent = element.incorrect_answers[1];
-        // option3.textContent = element.incorrect_answers[2];
-        // option4.textContent = element.incorrect_answers[3];
+        option1.textContent = element.incorrect_answers[0];
+        option2.textContent = element.incorrect_answers[1];
+        option3.textContent = element.incorrect_answers[2];
+        option4.textContent = element.incorrect_answers[3];
+
         contenedorOptions.append(option1, option2, option3, option4);
         card.append(question, category, contenedorOptions, next);
         fragment.append(card);
@@ -75,8 +80,6 @@ const shuffle = (arr, correctAnswer) => {
     const random = Math.floor(Math.random() * arr.length);
     return arr.splice(random, 0, correctAnswer);
 };
-
-getQuestions();
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -330,3 +333,60 @@ const loginGoogle = () => {
 
 //     const tbody = document.createElement('tbody');
 // }
+
+ */
+//Grafica de resultados
+
+
+const pintarGraficaResults = async () => {
+    const grafica = document.getElementById('graficaResultados').getContext('2d');
+
+    let results = JSON.parse(localStorage.getItem('resultados')) || [];
+    fechaJuego = [];
+    scoreJuego = [];
+
+    results.forEach((element)=>{
+        fechaJuego.push(element.fechaJuego)
+        scoreJuego.push(element.scoreJuego)
+    })
+    new Chart(grafica, {
+        type: 'line',
+        data: {
+            labels: fechaJuego,
+            datasets: [{
+                label: 'Your Stats',
+                data: scoreJuego,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+
+document.addEventListener('DOMContentLoaded',()=>{
+    pintarGraficaResults();
+})  
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const volumen = document.querySelector('.volumen');
+    const musicaFondo = document.querySelector('.musicaFondo');
+    musicaFondo.play()
+    volumen.addEventListener('click', () => {
+        if (musicaFondo.paused) {
+            musicaFondo.play()
+        } else {
+            musicaFondo.pause();
+        }
+    });
+});
+getQuestions();
+pintarQuestions();
