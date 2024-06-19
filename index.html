@@ -18,28 +18,38 @@
     </header>
     <main id="mainBienvenida">
         <section class="contenedorBienvenida">
-                <!-- AUTH btn login -->
-          <article class="contenedorTriggerPreguntas">
+            <!-- AUTH btn login -->
+            <article class="contenedorTriggerPreguntas">
                 <h3>Welcome to the Quiz!</h3>
                 <a href="/pages/questions.html">
                     <button class="triggerQuestionsBtn">Take the Quiz</button>
                 </a>
             </article>
-            <article class="contenedorGraficas hidden">
-              <canvas id="graficaResultados">
+        </section>
 
-                </canvas>
-            </article>
-            <div id="divLogin">
+        <section class="contenedorGraficas">
+            <article>
+                <div id="divLogin">
                     <button id="btnRegister" class="btnRegister">Register</button>
                     <button id="btnLogin" class="btnLogin">Login</button>
                     <div id="divLogout">
                         <button id="btnLogout" class="btnLogout">Logout</button>
                         <p id="message"></p>
                     </div>
-                    <button id="enviarResultados">Enviar resultados</button>
-            </div>
+                </div>
+                <div id="divStats">
+                    <button id="btnPrintGrafica" style="display:none">Ver mi Gráfica</button>
+                    <button id="btnPrintScores" style="display:none">Ver Scores</button>
+                </div>
+            </article>
+            <article id="contenedorGraficas" class="contenedorGraficas hidden">
+                <canvas id="graficaResultados">
+
+                </canvas>
+            </article>
+            <article id="contenedorScores" class="hidden"></article>
         </section>
+
 
         <!-- AUTH popups login -->
 
@@ -87,15 +97,12 @@
                 </div>
             </div>
         </section>
-  
-  <section class="contenedorGraficas">
-            <div>
-                
-            </div>
-        </section>
+
+
+
     </main>
     <footer></footer>
-  <audio class="musicaFondo" loop>
+    <audio class="musicaFondo" loop>
         <source src="assets/musicaPagina.mp3" type="audio/mpeg">
     </audio>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

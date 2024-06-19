@@ -1,20 +1,39 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const volumen = document.querySelector('.volumen');
+    const musicaFondo = document.querySelector('.musicaFondo');
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyAuLH-B5suV6RhxfnuTiEGwZkXW4aGSVz8",
+    authDomain: "fir-demo-e0698.firebaseapp.com",
+    projectId: "fir-demo-e0698",
+    storageBucket: "fir-demo-e0698.appspot.com",
+    messagingSenderId: "596752096583",
+    appId: "1:596752096583:web:46008be2c6fcbef2508062"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);// Inicializaar app Firebase
+const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
+const auth = firebase.auth();
+const provider = new firebase.auth.GoogleAuthProvider();
+
 //VARIABLES
 const contenedorPreguntas = document.querySelector('.contenedorPreguntas');
 const contenedorResultados = document.querySelector('.contenedorResultados');
 const triggerQuestionsBtn = document.querySelector('.triggerQuestionsBtn');
-const loginContainer = document.querySelector('.loginContainer');
-const signupContainer = document.querySelector('.signupContainer');
-const signUpForm = document.getElementById('signUpForm');
-const loginForm = document.getElementById('loginForm');
 const fragment = document.createDocumentFragment();
 const btnRegister = document.querySelector('#btnRegister');
 const btnLogin = document.querySelector('#btnLogin');
 const btnLogout = document.querySelector('#btnLogout');
 const btnExitLogin = document.querySelector('#btnExitLogin');
 const btnExitRegister = document.querySelector('#btnExitRegister');
-const enviarResultados = document.querySelector('#enviarResultados');
 const divLoginContainer = document.querySelector('#divLogin-container');
 const divRegisterContainer = document.querySelector('#divRegister-container');
+const btnPrintScores = document.querySelector('#btnPrintScores');
+const btnPrintGrafica = document.querySelector('#btnPrintGrafica');
+const contenedorGraficas = document.querySelector('#contenedorGraficas');
+const contenedorScores = document.querySelector('#contenedorScores');
 
 const rightAudio = new Audio('assets/RightAudio.ogg');
 const wrongAudio = new Audio('assets/WrongAudio.ogg');
@@ -40,16 +59,10 @@ document.addEventListener('click', ({ target }) => {
         if (iteratingIndex === 10) {
             correctAnswersArray = [];
             pushResultsToLocal(resultPerGameObj);
+            console.log(resultPerGameObj)
         }
     }
-
-    if (target.matches('.goToLogin')) {
-        loginContainer.classList.add('show');
-    }
-
 });
- 
-
 
 //FUNCIONES
 const getQuestions = async () => {
@@ -74,7 +87,6 @@ const getQuestions = async () => {
         throw console.log(error.status);
     }
 };
-/*
 
 const pintarQuestions = (arr, index) => {
     if (index === 10) {
@@ -173,22 +185,6 @@ const decodeHTML = (html) => {
     return textArea.value;
 };
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyAuLH-B5suV6RhxfnuTiEGwZkXW4aGSVz8",
-    authDomain: "fir-demo-e0698.firebaseapp.com",
-    projectId: "fir-demo-e0698",
-    storageBucket: "fir-demo-e0698.appspot.com",
-    messagingSenderId: "596752096583",
-    appId: "1:596752096583:web:46008be2c6fcbef2508062"
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);// Inicializaar app Firebase
-const db = firebase.firestore();// db representa mi BBDD //inicia Firestore
-const auth = firebase.auth();
-const provider = new firebase.auth.GoogleAuthProvider();
-
 
 //****** AUTHENTICATION ******
 
@@ -222,12 +218,13 @@ document.addEventListener('click', (event) => {
     }
 });
 
-document.getElementById("formLogin").addEventListener("submit", function (event) {
-    event.preventDefault();
-    let email = event.target.elements.email2.value;
-    let pass = event.target.elements.pass3.value;
-    signInUser(email, pass)
-});
+if(btnLogin) {
+    document.getElementById("formLogin").addEventListener("submit", function (event) {
+        event.preventDefault();
+        let email = event.target.elements.email2.value;
+        let pass = event.target.elements.pass3.value;
+        signInUser(email, pass)
+    });
 
 document.getElementById("formRegister").addEventListener("submit", function (event) {
     event.preventDefault();
@@ -237,6 +234,7 @@ document.getElementById("formRegister").addEventListener("submit", function (eve
 
     pass === pass2 ? signUpUser(email, pass) : alert("error password");
 });
+}
 
 const createUser = (user) => {
     db.collection("quiz")
@@ -297,6 +295,7 @@ const signOut = () => {
 // Listener de usuario en el sistema
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
+        if(btnLogin) {
         console.log(`Está en el sistema:${user.email} ${user.uid}`);
         document.getElementById("message").innerText = `¡Bienvenido ${user.email}!`;
 
@@ -304,51 +303,66 @@ firebase.auth().onAuthStateChanged(function (user) {
         btnRegister.style.display = 'none'
         btnLogin.style.display = 'none'
 
+        btnPrintScores.style.display= 'flex';
+        btnPrintGrafica.style.display= 'flex';
+    }
+
+        document.addEventListener('click', ({ target }) => {
+            if (target.matches('.optionBtn')) {
+                if (iteratingIndex === 10) {
+                    pushResultToFirebase(user.uid, resultPerGameObj);
+                    console.log(resultPerGameObj)
+                }
+            }
+
+        if (target.matches('#btnPrintGrafica')) {
+            contenedorScores.classList.remove('show');
+            contenedorScores.classList.add('hidden');
+            contenedorGraficas.classList.remove('hidden');
+            contenedorGraficas.classList.add('show');
+            }
+        
+            if (target.matches('#btnPrintScores')) {
+                contenedorScores.innerHTML='';
+                printScores()
+                contenedorGraficas.classList.remove('show');
+            contenedorGraficas.classList.add('hidden');
+            contenedorScores.classList.remove('hidden');
+            contenedorScores.classList.add('show');
+                // db.collection("quiz")
+                //     .get()
+                //     .then((docs) => {
+                //         docs.forEach((doc) => {
+                //             const dataBooksToPrint = doc.data().favourites;
+                //             printBooksFiltered(dataBooksToPrint)
+                //         })
+                //     })
+                }
+            });
+
     } else {
+        if(btnLogin) {
         console.log("no hay usuarios en el sistema");
         document.getElementById("message").innerText = ``;
 
         divLogout.style.display = 'none'
         btnRegister.style.display = 'block'
         btnLogin.style.display = 'block'
+
+        btnPrintScores.style.display= 'none';
+        btnPrintGrafica.style.display= 'none';
+
+        contenedorGraficas.classList.remove('show');
+        contenedorGraficas.classList.add('hidden');
+        contenedorScores.classList.remove('show');
+        contenedorScores.classList.add('hidden');
+        }
     }
-});
-
-// resultado de prueba
-const nuevoResultado = {
-    fecha: '2024-05-15',
-    aciertos: 5,
-}
-
-document.addEventListener('click', async (event) => {
-    const user = firebase.auth().currentUser;
-
-    if (event.target.matches('#enviarResultados')) {
-        console.log('funciona')
-        addPuntuación(user.uid, nuevoResultado);
-        console.log('funciona2')
-    }
-
-    // TODO crear botones para ver stats y score (solo visibles cuando user logeado), e incluir evento
-    // else if (event.target.classList.contains('btnStats')) {
-
-    //     if (user) {
-    //         pintarStats()
-
-    //     } else {
-    //     }
-
-    // } else if (event.target.classList.contains('btnScores')) {
-    //     if (user) {
-    //         pintarScore()
-    //     } else {
-    //     }
-    // }
 });
 
 //****** FIRESTORE DB ******
 
-const addPuntuación = (uid, nuevoResultado) => {
+const pushResultToFirebase = (uid, nuevoResultado) => {
     db.collection("quiz").where("id", "==", uid)
         .get()
         .then((docs) => {
@@ -367,7 +381,7 @@ const addPuntuación = (uid, nuevoResultado) => {
 
                     // Actualizar el array en Firestore
                     await userRef.update({ resultados: resultados });
-                    alert('Resultados registrados.');
+                    alert('Resultado registrado.');
                 } catch (error) {
                     console.error(`Error registrando la puntuación: ${error}`);
                 }
@@ -399,34 +413,70 @@ const loginGoogle = () => {
         });
 };
 
-// no esta terminada, en proceso.
-// const getMayoresResultados = () => {
-//     const tableTitulo = document.createElement ('h3');
-//     tableTitulo.innerHTML = 'TOTAL SCORE RANKING';
+// TRAER TODOS LOS SCORES DE FIREBASE
+async function getAllBestResults() {
+    // const quizCollection = db.collection("quiz");
+    // const querySnapshot = await getDocs(quizCollection);
 
-//     const table = document.createElement('table');
-//     table.id = 'tableScore';
+    const allBestResults = [];
 
-//     const tHead = document.createElement('thead');
+    db.collection("quiz")
+        .get()
+        .then((docs) => {
+            docs.forEach((doc) => {
+                const data = doc.data();
+                if (data.resultados && data.resultados.length > 0) {
+                    // Encuentra el resultado con el mayor número de aciertos
+                    const bestResult = data.resultados.reduce((max, result) =>
+                        result.scoreJuego > max.scoreJuego ? result : max, data.resultados[0]);
 
-//     const trHead = document.createElement('tr');
-//     const th1 = document.createElemenet('th');
-//     th1.textContent = 'RANK';
+                    // Añadir el mejor resultado al array allBestResults
+                    allBestResults.push({
+                        email: data.email,
+                        mejorResultado: bestResult
+                    });
+                }
+            })
+        })
+    return allBestResults;
+  }
+  
+  getAllBestResults().then((results) => {
+    console.log(results);
+  }).catch((error) => {
+    console.error("Error getting documents: ", error);
+  });
 
-//     const th2 = document.createElemenet('th');
-//     th2.textContent = 'SCORE';
+const printScores = () => {
+    const tableTitulo = document.createElement ('h3');
+    tableTitulo.innerHTML = 'TOTAL SCORE RANKING';
 
+    const table = document.createElement('table');
+    table.id = 'tableScore';
 
-//     const th3 = document.createElemenet('th');
-//     th3.textContent = 'NAME';
+    const tHead = document.createElement('thead');
 
-//     const th4 = document.createElemenet('th');
-//     th4.textContent = 'COUNT';
+    const trHead = document.createElement('tr');
+    const th1 = document.createElement('th');
+    th1.textContent = 'RANK';
 
-//     const tbody = document.createElement('tbody');
-// }
+    const th2 = document.createElement('th');
+    th2.textContent = 'SCORE';
 
- */
+    const th3 = document.createElement('th');
+    th3.textContent = 'NAME';
+
+    const th4 = document.createElement('th');
+    th4.textContent = 'COUNT';
+
+    const tbody = document.createElement('tbody');
+
+    trHead.append(th1, th2, th3, th4)
+    table.append(tHead, trHead, tbody)
+
+    contenedorScores.append(tableTitulo, table)
+}
+
 //Grafica de resultados
 
 
@@ -462,15 +512,8 @@ const pintarGraficaResults = async () => {
 }
 
 
-document.addEventListener('DOMContentLoaded',()=>{
-    pintarGraficaResults();
-})  
 
 
-
-document.addEventListener('DOMContentLoaded', () => {
-    const volumen = document.querySelector('.volumen');
-    const musicaFondo = document.querySelector('.musicaFondo');
     musicaFondo.play()
     volumen.addEventListener('click', () => {
         if (musicaFondo.paused) {
@@ -479,6 +522,9 @@ document.addEventListener('DOMContentLoaded', () => {
             musicaFondo.pause();
         }
     });
-});
+
 getQuestions();
 pintarQuestions();
+pintarGraficaResults();
+
+});
