@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const volumen = document.querySelector('.volumen');
     const musicaFondo = document.querySelector('.musicaFondo');
-    musicaFondo.play();
+    musicaFondo.volume = 0.2;
+    // musicaFondo.play();
 
     // Your web app's Firebase configuration
     const firebaseConfig = {
@@ -36,8 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const contenedorGraficas = document.querySelector('#contenedorGraficas');
     const contenedorScores = document.querySelector('#contenedorScores');
 
-    const rightAudio = new Audio('assets/RightAudio.ogg');
-    const wrongAudio = new Audio('assets/WrongAudio.ogg');
+    const rightAudio = new Audio('/assets/RightAudio.ogg');
+    const wrongAudio = new Audio('/assets/WrongAudio.ogg');
     // variables para guardar resultados
     let questionsArrayGlobal;
     let iteratingIndex = 0;
@@ -50,21 +51,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     //EVENTOS
-    document.addEventListener('DOMContentLoad', () => {
-    });
 
     document.addEventListener('click', ({ target }) => {
         if (target.matches('.optionBtn')) {
-            const valueOption = target.value;
-            validarRespuestaCorrecta(valueOption);
-            clearComponent(contenedorPreguntas);
-            pintarQuestions(questionsArrayGlobal, iteratingIndex + 1);
-            ++iteratingIndex;
-            if (iteratingIndex === 10) {
-                correctAnswersArray = [];
-                pushResultsToLocal(resultPerGameObj);
-                console.log(resultPerGameObj)
-            }
+            // const valueOption = target.value;
+            validarRespuestaCorrecta(target);
+            setTimeout(() => {
+                clearComponent(contenedorPreguntas);
+                pintarQuestions(questionsArrayGlobal, iteratingIndex + 1);
+                ++iteratingIndex;
+                console.log(resultPerGameObj.scoreJuego);
+                if (iteratingIndex === 10) {
+                    correctAnswersArray = [];
+                    pushResultsToLocal(resultPerGameObj);
+                    console.log(resultPerGameObj);
+                }
+            }, "3000")
         }
     });
 
@@ -164,9 +166,19 @@ document.addEventListener('DOMContentLoaded', () => {
         component.innerHTML = '';
     };
 
-    const validarRespuestaCorrecta = (value) => {
-        const correcto = correctAnswersArray.find(element => element === value);
-        if (correcto) resultPerGameObj.scoreJuego += 1;
+    const validarRespuestaCorrecta = (target) => {
+        const allOptBtn = document.querySelectorAll('.optionBtn');
+        
+        allOptBtn.forEach(element => {
+            if (correctAnswersArray.includes(element.textContent)) {
+                if (element === target) {
+                    resultPerGameObj.scoreJuego += 1;
+                }
+                element.classList.add('green');
+            } else {
+                element.classList.add('red');
+            }
+        });
     };
 
     const pushResultsToLocal = (resultado) => {
@@ -517,12 +529,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // musicaFondo.play();
     volumen.addEventListener('click', () => {
-        if (musicaFondo.paused) {
-            musicaFondo.play();
-            document.querySelector('.volumen').classList.remove('musicoff');
-        } else {
+        if (!musicaFondo.paused) {
             musicaFondo.pause();
             document.querySelector('.volumen').classList.add('musicoff');
+        } else {
+            musicaFondo.play();
+            document.querySelector('.volumen').classList.remove('musicoff');
         }
     });
 

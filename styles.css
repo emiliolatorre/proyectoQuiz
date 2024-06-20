@@ -59,7 +59,10 @@ main {
 .triggerQuestionsBtn,
 .btnRegister,
 .btnLogin,
-.btnLogout  {
+.btnLogout,
+.goToResultsBtn,
+.btnPrintGrafica,
+.btnPrintScores {
     background-color: rgb(28, 168, 224);
     border: rgb(28, 168, 224) 4px solid;
     border-radius: 5px;
@@ -71,7 +74,10 @@ main {
 .triggerQuestionsBtn:hover,
 .btnRegister:hover,
 .btnLogin:hover,
-.btnLogout:hover  {
+.btnLogout:hover,
+.goToResultsBtn:hover,
+.btnPrintGrafica:hover,
+.btnPrintScores:hover {
     background-color: white;
     border: rgb(28, 168, 224) 4px solid;
     border-radius: 5px;
@@ -113,18 +119,22 @@ main {
     height: 450px;
 }
 
+.contenedorPreguntas {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    height: 100%;
+}
+
 .cardPreguntas {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     background-color: white;
     border-radius: 15px;
     width: 80%;
-    height: 40%;
+    height: 100%;
     padding: 20px;
-    height: 600px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .optionBtn {
@@ -150,37 +160,38 @@ main {
 }
 
 .option1 {
-    background-color: rgb(216, 59, 59);
-    border: rgb(216, 59, 59);
-}
-
-.option2 {
     background-color: rgb(233, 233, 89);
     border: rgb(233, 233, 89);
 }
 
-.option3 {
-    background-color: rgb(108, 214, 108);
-    border: rgb(108, 214, 108);
+.option2 {
+    background-color: rgb(209, 108, 214);
+    border: rgb(209, 108, 214);
+    ;
 }
 
-.option4 {
+.option3 {
     background-color: rgb(112, 189, 219);
     border: rgb(112, 189, 219);
 }
 
-.nextBtn {
-    background-color: rgb(28, 168, 224);
-    border: rgb(28, 168, 224);
-    border-radius: 5px;
-    width: 50%;
-    height: 40px;
-    color: white;
-    padding-left: 10px;
+.option4 {
+    background-color: rgb(255, 204, 153);
+    border: rgb(255, 204, 153);
 }
 
 .hidden {
     display: none !important;
+}
+
+.red {
+    background-color: rgb(216, 59, 59);
+    border: rgb(216, 59, 59);
+}
+
+.green {
+    background-color: rgb(108, 214, 108);
+    border: rgb(108, 214, 108);
 }
 
 /* AUTHENTICATION */
@@ -276,108 +287,109 @@ main {
 }
 
 .divInside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: white;
     border-radius: 5px;
     width: 600px;
-    max-width: 100%;
-    padding: 0px 20px 30px 20px;
+    text-align: center;
+    gap: 20px;
+    padding: 10px;
+}
+
+.inputContainer {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.icon {
+    padding: 10px;
+    background: rgb(28, 168, 224);;
+    color: white;
+    min-width: 50px;
     text-align: center;
 }
+
+.inputField {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    /* border-radius: ; */
+}
+
+.inputField:focus {
+    border: 2px solid rgb(28, 168, 224);;
+  }
 
 .headExit {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
 .titleRegister {
-    flex-grow: 1;
+    width: 100%;
     text-align: center;
-    margin-left: 30px;
-    margin-top: 30px;
 }
 
 .btnExit {
-    background-color: red;
+    display: flex;
+    background-color: rgb(28, 168, 224);;
     border: none;
     border-radius: 3px;
     width: 30px;
     height: 30px;
-    padding: 0px 0px;
-    margin-left: auto;
 }
 
 
 .btnExit:hover {
     cursor: pointer;
-    background-color: rgb(222, 0, 0);
+    background-color: red;;
 }
 
 .cruz_exit {
     width: 100%
 }
 
-#formRegister input,
-#formLogin input {
-    width: 50%;
-    height: 30px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-}
-
-#formRegister label,
-#formLogin label {
-    font-weight: 500;
-    font-size: medium;
-}
-
-#formRegister input[type="submit"] {
-    background-color: blue;
-    color: white;
+#formRegister input[type="submit"],
+#formLogin input[type="submit"],
+#btnGoogle {
+    width: 100%;
+    height: 45px;
+    background: #fff;
     border: none;
-    border-radius: 5px;
-    font-size: medium;
-    font-weight: 500;
-    margin-top: -10px;
-    height: 40px;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    border: 1px solid rgb(28, 168, 224);;
 }
 
-#formLogin input[type="submit"] {
-    background-color: blue;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: medium;
-    font-weight: 500;
-    margin-top: 10px;
-    height: 40px;
+#btnGoogle {
+    width: 47%;
 }
 
 #formRegister input[type="submit"]:hover,
+#formLogin input[type="submit"]:hover,
+#btnGoogle:hover {
+    border: 3px solid rgb(28, 168, 224);;
+    color: rgb(28, 168, 224);;
+}
+
+/* #formRegister input[type="submit"]:hover,
 #formLogin input[type="submit"]:hover {
     background-color: rgb(0, 0, 232);
     cursor: pointer;
-}
+} */
 
 #linkRegister {
     font-size: small;
+    text-decoration: none;
 }
-/* 
-.contenedorGraficas {
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-
-    background-color: white;
-    border-radius: 15px;
-    width: 45%;
-    padding: auto;
-    height: 80vh;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 30px;
-    margin-bottom: 40px;
-} */
 
 #divStats {
     display: flex;
@@ -435,37 +447,48 @@ td {
 
 /* MEDIA QUERIES */
 
+@media (max-width: 500px) {
+    #divLogin {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 @media (min-width: 800px) {
 
-    /* main {
-        margin-left: auto;
-        margin-right: auto;
-    } */
+    main {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .contenedorPreguntas{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
     .cardPreguntas {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: space-around;
         background-color: white;
         border-radius: 15px;
-        width: 80%;
+        width: 100%;
+        height: 80%;
         padding: 20px;
-        height: 600px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 30px;
-        align-self: center;
     }
 
-    .respuestaBtn {
+    .optionBtn {
         border-radius: 5px;
-        width: 100%;
+        width: 45%;
         height: 70px;
-        color: white;
     }
 
     #contenedorOptions {
         display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
         gap: 20px;
     }
 
@@ -475,36 +498,25 @@ td {
         justify-content: space-around;
         background-color: white;
         border-radius: 15px;
-        width: 45%;
+        width: 40%;
         padding: 20px;
-        height: 80vh;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 30px;
-        margin-bottom: 40px;
+        height: 40vh;
     }
 
     .contenedorBienvenida {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         background-color: white;
         border-radius: 15px;
-        width: 45%;
-        height: 80vh;
+        width: 40%;
+        height: 40vh;
         padding: 20px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 30px;
-        margin-bottom: 40px;
     }
 
-    /* #mainBienvenida {
+    #divLogin {
         display: flex;
-        flex-direction: row;
-        padding-left: auto;
-        padding-right: auto;
-    } */
+        flex-direction: column;
+    }
 
     #graficaResultados {
         width: 100%;
@@ -514,64 +526,52 @@ td {
 
 @media (min-width: 1200px) {
 
-    /* main {
-        margin-left: auto;
-        margin-right: auto;
-    } */
+    main {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .contenedorPreguntas{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
     .cardPreguntas {
         display: flex;
+        flex-direction: column;
+        justify-content: space-around;
         background-color: white;
-        border-radius: 25px;
-        width: 80%;
-        padding-right: auto;
-        padding-left: auto;
-        height: 450px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 30px;
+        border-radius: 15px;
+        width: 40%;
+        height: 40%;
+        padding: 20px;
     }
 
-    .respuestaBtn {
+    .optionBtn {
         border-radius: 5px;
-        width: 350px;
-        height: 120px;
-        color: white;
+        width: 45%;
+        height: 70px;
     }
 
     #contenedorOptions {
         display: flex;
-        flex-wrap: wrap;
         flex-direction: row;
-        justify-content: space-evenly;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .nextBtn {
-        background-color: rgb(28, 168, 224);
-        border: rgb(28, 168, 224);
-        border-radius: 5px;
-        width: 25%;
-        height: 40px;
-        color: white;
-        align-self: flex-end;
-        margin-right: 50px;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
     }
 
     .contenedorBienvenida {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
+        align-items: center;
         background-color: white;
         border-radius: 15px;
-        width: 45%;
-        height: 80vh;
+        width: 40%;
+        height: 40vh;
         padding: 20px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 30px;
-        margin-bottom: 40px;
     }
 
 }
