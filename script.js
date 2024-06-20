@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const resultsLink = document.createElement('a');
             const goToResultsBtn = document.createElement('button');
             goToResultsBtn.classList.add('goToResultsBtn');
-            resultsLink.href = '/pages/results.html';
+            resultsLink.href = 'pages/results.html';
             resultsLink.append(goToResultsBtn);
             goToResultsBtn.textContent = 'Comprueba tu puntuación!'
             fragment.append(resultsLink);
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const indexLink = document.createElement('a');
         const goToIndexgBtn = document.createElement('button');
         score.textContent = `${results[results.length - 1].scoreJuego}/10`;
-        questionsLink.href = '/pages/questions.html';
+        questionsLink.href = 'pages/questions.html';
         playAgaingBtn.textContent = 'Play Again!';
         indexLink.href = '/index.html';
         goToIndexgBtn.textContent = 'Home';
