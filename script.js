@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPrintGrafica = document.querySelector('#btnPrintGrafica');
     const contenedorGraficas = document.querySelector('#contenedorGraficas');
     const contenedorScores = document.querySelector('#contenedorScores');
+    let resultsLocal = JSON.parse(localStorage.getItem('resultados')) || [];
 
     const rightAudio = new Audio('assets/RightAudio.ogg');
     const wrongAudio = new Audio('assets/WrongAudio.ogg');
@@ -240,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const createUser = (user) => {
+const createUser = (user) => {
         db.collection("quiz")
             .add(user)
             .then((docRef) => {
@@ -249,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch((error) => console.error("Error adding document: ", error));
     };
 
-    const signUpUser = (email, password) => {
+const signUpUser = (email, password) => {
         firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
@@ -269,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     };
 
-    const signInUser = (email, password) => {
+const signInUser = (email, password) => {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in
@@ -286,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     };
 
-    const signOut = () => {
+const signOut = () => {
         let user = firebase.auth().currentUser;
 
         firebase.auth().signOut().then(() => {
@@ -294,6 +295,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }).catch((error) => {
             console.log("hubo un error: " + error);
         });
+    };
+
+const loginGoogle = () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider)
+            .then((result) => {
+                // Esto te da un token de acceso a Google.
+                const token = result.credential.accessToken;
+                // La información del usuario registrado.
+                const user = result.user;
+                console.log("Usuario logado con Google:", user);
+                divLoginContainer.classList.remove('show');
+                divRegisterContainer.classList.remove('show');
+            }).catch((error) => {
+                // Manejo de errores.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                const email = error.email;
+                const credential = error.credential;
+                console.error(`Error en login con Google: ${errorCode}, ${errorMessage}`);
+            });
     };
 
     // Listener de usuario en el sistema
@@ -309,6 +331,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 btnPrintScores.style.display = 'flex';
                 btnPrintGrafica.style.display = 'flex';
+
+                
             }
 
             document.addEventListener('click', ({ target }) => {
@@ -324,23 +348,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     contenedorScores.classList.add('hidden');
                     contenedorGraficas.classList.remove('hidden');
                     contenedorGraficas.classList.add('show');
+
+                    getUserResults().then((results) => {
+                        pintarGraficaResults(results);
+                    }).catch((error) => {
+                        console.error("Error trayendo documentos de Firebase: ", error);
+                    });
                 }
 
                 if (target.matches('#btnPrintScores')) {
                     contenedorScores.innerHTML = '';
-                    printScores()
                     contenedorGraficas.classList.remove('show');
                     contenedorGraficas.classList.add('hidden');
                     contenedorScores.classList.remove('hidden');
                     contenedorScores.classList.add('show');
-                    // db.collection("quiz")
-                    //     .get()
-                    //     .then((docs) => {
-                    //         docs.forEach((doc) => {
-                    //             const dataBooksToPrint = doc.data().favourites;
-                    //             printBooksFiltered(dataBooksToPrint)
-                    //         })
-                    //     })
+
+                    getAllBestResults().then((results) => {
+                        console.log(results);
+                        printScores(results)
+                    }).catch((error) => {
+                        console.error("Error trayendo documentos de Firebase: ", error);
+                    });
                 }
             });
 
@@ -360,6 +388,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 contenedorGraficas.classList.add('hidden');
                 contenedorScores.classList.remove('show');
                 contenedorScores.classList.add('hidden');
+
+                pintarGraficaResults(resultsLocal)
             }
         }
     });
@@ -396,62 +426,59 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     };
 
-    const loginGoogle = () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        auth.signInWithPopup(provider)
-            .then((result) => {
-                // Esto te da un token de acceso a Google.
-                const token = result.credential.accessToken;
-                // La información del usuario registrado.
-                const user = result.user;
-                console.log("Usuario logado con Google:", user);
-                divLoginContainer.classList.remove('show');
-                divRegisterContainer.classList.remove('show');
-            }).catch((error) => {
-                // Manejo de errores.
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                const email = error.email;
-                const credential = error.credential;
-                console.error(`Error en login con Google: ${errorCode}, ${errorMessage}`);
-            });
-    };
+// TRAER TODOS LOS SCORES DE FIREBASE
+async function getAllBestResults() {
+    const allBestResults = [];
 
-    // TRAER TODOS LOS SCORES DE FIREBASE
-    async function getAllBestResults() {
-        // const quizCollection = db.collection("quiz");
-        // const querySnapshot = await getDocs(quizCollection);
+    try {
+        const querySnapshot = await db.collection("quiz").get();
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            if (data.resultados && data.resultados.length > 0) {
+                // Encuentra el resultado con el mayor número de aciertos
+                const bestResult = data.resultados.reduce((max, result) =>
+                    result.scoreJuego > max.scoreJuego ? result : max, data.resultados[0]);
 
-        const allBestResults = [];
-
-        db.collection("quiz")
-            .get()
-            .then((docs) => {
-                docs.forEach((doc) => {
-                    const data = doc.data();
-                    if (data.resultados && data.resultados.length > 0) {
-                        // Encuentra el resultado con el mayor número de aciertos
-                        const bestResult = data.resultados.reduce((max, result) =>
-                            result.scoreJuego > max.scoreJuego ? result : max, data.resultados[0]);
-
-                        // Añadir el mejor resultado al array allBestResults
-                        allBestResults.push({
-                            email: data.email,
-                            mejorResultado: bestResult
-                        });
-                    }
-                })
-            })
-        return allBestResults;
+                // Añadir el mejor resultado al array allBestResults
+                allBestResults.push({
+                    email: data.email,
+                    mejorResultado: bestResult
+                });
+            }
+        })
+        // const resultsOrdenados = allBestResults.sort((a, b) => b.mejorResultado.scoreJuego - a.mejorResultado.scoreJuego);
+        const resultsOrdenados = allBestResults.sort((a, b) => {
+            if (b.mejorResultado.scoreJuego === a.mejorResultado.scoreJuego) {
+                return new Date(b.mejorResultado.fechaJuego) - new Date(a.mejorResultado.fechaJuego);
+            }
+            return b.mejorResultado.scoreJuego - a.mejorResultado.scoreJuego;
+        });
+        return resultsOrdenados;
+    } catch (error) {
+        console.error("Error trayendo documentos de Firebase: ", error);
     }
+}
 
-    getAllBestResults().then((results) => {
-        console.log(results);
-    }).catch((error) => {
-        console.error("Error getting documents: ", error);
-    });
+// TRAER SOLO PARTIDAS DEL USER PARA GRAFICA
+async function getUserResults() {
+    const userResults = [];
 
-    const printScores = () => {
+    try {
+        const user = firebase.auth().currentUser;
+        const querySnapshot = await db.collection("quiz").where("id", "==", user.uid).get()
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+                    userResults.push(data.resultados);
+                })
+                ;
+        return userResults
+    } catch (error) {
+        console.error("Error trayendo el documento del user de Firebase: ", error);
+    }
+}
+
+
+    const printScores = (array) => {
         const tableTitulo = document.createElement('h3');
         tableTitulo.innerHTML = 'TOTAL SCORE RANKING';
 
@@ -468,15 +495,41 @@ document.addEventListener('DOMContentLoaded', () => {
         th2.textContent = 'SCORE';
 
         const th3 = document.createElement('th');
-        th3.textContent = 'NAME';
+        th3.textContent = 'FECHA';
 
         const th4 = document.createElement('th');
-        th4.textContent = 'COUNT';
+        th4.textContent = 'NAME';
 
         const tbody = document.createElement('tbody');
 
-        trHead.append(th1, th2, th3, th4)
-        table.append(tHead, trHead, tbody)
+        array.forEach(partida => {
+            const score = partida.mejorResultado.scoreJuego;
+            const fecha = partida.mejorResultado.fechaJuego;
+            const email = partida.email;
+            let rank = 1;
+
+            const trScore = document.createElement('tr');
+            const tdScore1 = document.createElement('td');
+            tdScore1.textContent = rank;
+
+            const tdScore2 = document.createElement('td');
+            tdScore2.textContent = score;
+
+            const tdScore3 = document.createElement('td');
+            tdScore3.textContent = fecha;
+
+            const tdScore4 = document.createElement('td');
+            tdScore4.textContent = email;
+
+            rank++
+
+            trScore.append(tdScore1, tdScore2, tdScore3, tdScore4);
+            tbody.append(trScore);
+        })
+
+        trHead.append(th1, th2, th3, th4);
+        tHead.append(trHead);
+        table.append(tHead, tbody);
 
         contenedorScores.append(tableTitulo, table)
     }
@@ -484,14 +537,14 @@ document.addEventListener('DOMContentLoaded', () => {
     //Grafica de resultados
 
 
-    const pintarGraficaResults = async () => {
+    const pintarGraficaResults = async (array) => {
         const grafica = document.getElementById('graficaResultados').getContext('2d');
 
-        let results = JSON.parse(localStorage.getItem('resultados')) || [];
+        
         fechaJuego = [];
         scoreJuego = [];
 
-        results.forEach((element) => {
+        array.forEach((element) => {
             fechaJuego.push(element.fechaJuego)
             scoreJuego.push(element.scoreJuego)
         })
