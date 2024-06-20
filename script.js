@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const volumen = document.querySelector('.volumen');
     const musicaFondo = document.querySelector('.musicaFondo');
-    musicaFondo.play();
+    // musicaFondo.play();
     // Your web app's Firebase configuration
     const firebaseConfig = {
         apiKey: "AIzaSyAuLH-B5suV6RhxfnuTiEGwZkXW4aGSVz8",
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const resultsLink = document.createElement('a');
             const goToResultsBtn = document.createElement('button');
             goToResultsBtn.classList.add('goToResultsBtn');
-            resultsLink.href = 'pages/results.html';
+            resultsLink.href = 'results.html';
             resultsLink.append(goToResultsBtn);
             goToResultsBtn.textContent = 'Comprueba tu puntuación!'
             fragment.append(resultsLink);
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const indexLink = document.createElement('a');
         const goToIndexgBtn = document.createElement('button');
         score.textContent = `${results[results.length - 1].scoreJuego}/10`;
-        questionsLink.href = 'pages/questions.html';
+        questionsLink.href = 'questions.html';
         playAgaingBtn.textContent = 'Play Again!';
         indexLink.href = '/index.html';
         goToIndexgBtn.textContent = 'Home';
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     // const validarRespuestaCorrecta = (target) => {
     //     const allOptBtn = document.querySelectorAll('.optionBtn');
-        
+
     //     allOptBtn.forEach(element => {
     //         if (correctAnswersArray.includes(element.textContent)) {
     //             if (element === target) {
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const validarRespuestaCorrecta = (target) => {
         const allOptBtn = Array.from(document.querySelectorAll('.optionBtn'));
         const correctAnswer = correctAnswersArray.find(answer => allOptBtn.some(btn => btn.textContent === answer));
-        
+
         allOptBtn.forEach(element => {
             if (element.textContent === correctAnswer) {
                 if (element === target) {
@@ -185,8 +185,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
-    
-    
+
+
     const pushResultsToLocal = (resultado) => {
         const local = localStorage.getItem('resultados');
         const resultados = local ? JSON.parse(local) : [];
@@ -224,6 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
             divLoginContainer.classList.remove('show')
             divGraficasContainer.classList.remove('show')
             divScoresContainer.classList.remove('show')
+            document.querySelector('.contenedorGraph').classList.add('hidden');
         }
 
         if (event.target.matches('#linkRegister')) {
@@ -260,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch((error) => console.error("Error adding document: ", error));
     };
-const signUpUser = (email, password) => {
+    const signUpUser = (email, password) => {
         firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
@@ -278,7 +279,7 @@ const signUpUser = (email, password) => {
                 console.log("Error en el sistema" + error.message, "Error: " + error.code);
             });
     };
-const signInUser = (email, password) => {
+    const signInUser = (email, password) => {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in
@@ -294,7 +295,7 @@ const signInUser = (email, password) => {
                 console.log(errorMessage)
             });
     };
-const signOut = () => {
+    const signOut = () => {
         let user = firebase.auth().currentUser;
         firebase.auth().signOut().then(() => {
             console.log("Sale del sistema: " + user.email);
@@ -302,7 +303,7 @@ const signOut = () => {
             console.log("hubo un error: " + error);
         });
     };
-const loginGoogle = () => {
+    const loginGoogle = () => {
         const provider = new firebase.auth.GoogleAuthProvider();
         auth.signInWithPopup(provider)
             .then((result) => {
@@ -345,6 +346,8 @@ const loginGoogle = () => {
                         // contenedorGraficas.classList.remove('hidden');
                         // contenedorGraficas.classList.add('show');
                         getUserResults().then((results) => {
+                            // contenedorScores.classList.remove('hidden');
+                            document.querySelector('.contenedorGraph').classList.remove('hidden');
                             document.querySelector('.graficaL').classList.remove('show');
                             document.querySelector('.graficaL').classList.add('hidden');
                             document.querySelector('.graficaF').classList.remove('hidden');
@@ -356,13 +359,14 @@ const loginGoogle = () => {
                         divGraficasContainer.classList.add('show');
                     }
                     if (target.matches('#btnPrintScores')) {
-                        contenedorScores.innerHTML = '';
                         // contenedorGraficas.classList.remove('show');
                         // contenedorGraficas.classList.add('hidden');
                         // contenedorScores.classList.remove('hidden');
                         // contenedorScores.classList.add('show');
                         divScoresContainer.classList.add('show');
                         getAllBestResults().then((results) => {
+                            contenedorScores.innerHTML= '';
+                            contenedorScores.classList.remove('hidden');
                             console.log(results);
                             printScores(results)
                         }).catch((error) => {
@@ -381,8 +385,9 @@ const loginGoogle = () => {
                 btnPrintScores.style.display = 'none';
                 contenedorScores.classList.remove('show');
                 contenedorScores.classList.add('hidden');
-                document.addEventListener('click', ({target}) => {
+                document.addEventListener('click', ({ target }) => {
                     if (target.matches('#btnPrintGrafica')) {
+                        document.querySelector('.contenedorGraph').classList.remove('hidden');
                         document.querySelector('.graficaL').classList.remove('hidden');
                         document.querySelector('.graficaL').classList.add('show');
                         document.querySelector('.graficaF').classList.remove('show');
@@ -421,52 +426,52 @@ const loginGoogle = () => {
                 alert(error);
             });
     };
-// TRAER TODOS LOS SCORES DE FIREBASE
-async function getAllBestResults() {
-    const allBestResults = [];
-    try {
-        const querySnapshot = await db.collection("quiz").get();
-        querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            if (data.resultados && data.resultados.length > 0) {
-                // Encuentra el resultado con el mayor número de aciertos
-                const bestResult = data.resultados.reduce((max, result) =>
-                    result.scoreJuego > max.scoreJuego ? result : max, data.resultados[0]);
-                // Añadir el mejor resultado al array allBestResults
-                allBestResults.push({
-                    email: data.email,
-                    mejorResultado: bestResult
-                });
-            }
-        })
-        // const resultsOrdenados = allBestResults.sort((a, b) => b.mejorResultado.scoreJuego - a.mejorResultado.scoreJuego);
-        const resultsOrdenados = allBestResults.sort((a, b) => {
-            if (b.mejorResultado.scoreJuego === a.mejorResultado.scoreJuego) {
-                return new Date(b.mejorResultado.fechaJuego) - new Date(a.mejorResultado.fechaJuego);
-            }
-            return b.mejorResultado.scoreJuego - a.mejorResultado.scoreJuego;
-        });
-        return resultsOrdenados;
-    } catch (error) {
-        console.error("Error trayendo documentos de Firebase: ", error);
+    // TRAER TODOS LOS SCORES DE FIREBASE
+    async function getAllBestResults() {
+        const allBestResults = [];
+        try {
+            const querySnapshot = await db.collection("quiz").get();
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                if (data.resultados && data.resultados.length > 0) {
+                    // Encuentra el resultado con el mayor número de aciertos
+                    const bestResult = data.resultados.reduce((max, result) =>
+                        result.scoreJuego > max.scoreJuego ? result : max, data.resultados[0]);
+                    // Añadir el mejor resultado al array allBestResults
+                    allBestResults.push({
+                        email: data.email,
+                        mejorResultado: bestResult
+                    });
+                }
+            })
+            // const resultsOrdenados = allBestResults.sort((a, b) => b.mejorResultado.scoreJuego - a.mejorResultado.scoreJuego);
+            const resultsOrdenados = allBestResults.sort((a, b) => {
+                if (b.mejorResultado.scoreJuego === a.mejorResultado.scoreJuego) {
+                    return new Date(b.mejorResultado.fechaJuego) - new Date(a.mejorResultado.fechaJuego);
+                }
+                return b.mejorResultado.scoreJuego - a.mejorResultado.scoreJuego;
+            });
+            return resultsOrdenados;
+        } catch (error) {
+            console.error("Error trayendo documentos de Firebase: ", error);
+        }
     }
-}
-// TRAER SOLO PARTIDAS DEL USER PARA GRAFICA
-async function getUserResults() {
-    const userResults = [];
-    try {
-        const user = firebase.auth().currentUser;
-        const querySnapshot = await db.collection("quiz").where("id", "==", user.uid).get()
-        querySnapshot.forEach((doc) => {
-            const data = doc.data();
-                    userResults.push(data.resultados);
-                })
+    // TRAER SOLO PARTIDAS DEL USER PARA GRAFICA
+    async function getUserResults() {
+        const userResults = [];
+        try {
+            const user = firebase.auth().currentUser;
+            const querySnapshot = await db.collection("quiz").where("id", "==", user.uid).get()
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                userResults.push(data.resultados);
+            })
                 ;
-        return userResults
-    } catch (error) {
-        console.error("Error trayendo el documento del user de Firebase: ", error);
+            return userResults
+        } catch (error) {
+            console.error("Error trayendo el documento del user de Firebase: ", error);
+        }
     }
-}
     const printScores = (array) => {
         let rank = 1;
         const tableTitulo = document.createElement('h3');
@@ -510,8 +515,8 @@ async function getUserResults() {
     const pintarGraficaResults = async (array) => {
         grafica.innerHTML = '';
         graficaLocal.innerHTML = '';
-        let  fechaJuego = [];
-        let  scoreJuego = [];
+        let fechaJuego = [];
+        let scoreJuego = [];
         console.log(array);
         array[0].forEach((element) => {
             fechaJuego.push(element.fechaJuego)
@@ -578,7 +583,7 @@ async function getUserResults() {
         }
     });
     getQuestions();
-    // pintarQuestions();
     pintarResults();
+    pintarQuestions();
     // pintarGraficaResults();
 });
