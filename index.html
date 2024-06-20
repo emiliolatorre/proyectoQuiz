@@ -69,9 +69,18 @@
                         </div>
                         <form id="formRegister" action="#" method="POST">
                             <div>
-                                <input type="email" id="email" name="email" placeholder="Introduce email..."><br>
-                                <input type="password" id="pass" name="pass" placeholder="Introduce password..."><br>
-                                <input type="password" id="pass2" name="pass2" placeholder="Repite password..."><br><br>
+                                <div class="inputContainer">
+                                    <i class="fa fa-envelope icon"></i>
+                                    <input type="email" id="email" class="inputField" name="email" placeholder="Introduce email...">
+                                </div>
+                                <div class="inputContainer">
+                                    <i class="fa fa-key icon"></i>
+                                    <input type="password" id="pass" class="inputField" name="pass" placeholder="Introduce password...">
+                                </div>
+                                <div class="inputContainer">
+                                    <i class="fa fa-key icon"></i>
+                                    <input type="password" id="pass2" class="inputField" name="pass2" placeholder="Repite password...">
+                                </div>
                                 <input type="submit" value="Enviar">
                             </div>
                         </form>
@@ -88,14 +97,18 @@
                             </button>
                         </div>
                         <form id="formLogin" action="#" method="POST">
-                            <div>
-                                <input type="email" id="email2" name="email2" placeholder="Introduce email..."><br>
-                                <input type="password" id="pass3" name="pass3" placeholder="Introduce password..."><br>
-                                <input type="submit" value="Enviar">
+                            <div class="inputContainer">
+                                <i class="fa fa-envelope icon"></i>
+                                <input type="email" id="email2" class="inputField" name="email2" placeholder="Introduce email...">
                             </div>
+                            <div class="inputContainer">
+                                <i class="fa fa-key icon"></i>
+                                <input type="password" id="pass3" class="inputField" name="pass3" placeholder="Introduce password...">
+                            </div>
+                            <input type="submit" value="Enviar">
                         </form>
                         <button id="btnGoogle" onclick="loginGoogle()">Login with Google</button>
-                        <a href="#" id="linkRegister">Si aún no estás registrado, clika aquí</a>
+                        <a href="#" id="linkRegister">¿Aún no tienes cuenta?</a>
                     </div>
                 </div>
             </div>
