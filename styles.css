@@ -32,6 +32,7 @@ main {
     padding: 24px;
     background-color: rgb(193, 224, 237);
     height: 90vh;
+    gap: 8px;
 }
 
 .contenedorBienvenida {
@@ -46,7 +47,7 @@ main {
     padding: 20px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
+    /* margin-top: 30px; */
 }
 
 .contenedorTriggerPreguntas {
@@ -56,13 +57,66 @@ main {
     gap: 38px;
 }
 
+.contenedorPreguntas a {
+    background-color: #fff;
+    border-radius: 10px;
+    border: rgb(28, 168, 224) 3px solid;
+}
+
+.goToResultsBtn {
+    margin: 100px;
+}
+
+.contenedorResultados article:first-child {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    background-color: rgb(28, 168, 224);
+    border-radius:50%;
+    width: 50%;
+    /* height: 50%; */
+    position: relative;
+}
+
+.contenedorResultados article:first-child::after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+}
+
+.contenedorResultados article:last-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedorResultados article:first-child p {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 13vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navResults {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .triggerQuestionsBtn,
 .btnRegister,
 .btnLogin,
 .btnLogout,
 .goToResultsBtn,
-.btnPrintGrafica,
-.btnPrintScores {
+#btnPrintGrafica,
+#btnPrintScores,
+.contenedorResultados button {
     background-color: rgb(28, 168, 224);
     border: rgb(28, 168, 224) 4px solid;
     border-radius: 5px;
@@ -71,13 +125,20 @@ main {
     padding: 18px;
 }
 
+
+#btnPrintScores {
+    display: flex;
+    justify-content: center;
+}
+
 .triggerQuestionsBtn:hover,
 .btnRegister:hover,
 .btnLogin:hover,
 .btnLogout:hover,
 .goToResultsBtn:hover,
-.btnPrintGrafica:hover,
-.btnPrintScores:hover {
+#btnPrintGrafica:hover,
+#btnPrintScores:hover,
+.contenedorResultados button:hover {
     background-color: white;
     border: rgb(28, 168, 224) 4px solid;
     border-radius: 5px;
@@ -85,9 +146,10 @@ main {
     padding: 18px;
 }
 
-.contenedorResultados {
+/* .contenedorResultados {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between;
     background-color: white;
     border-radius: 15px;
@@ -97,10 +159,12 @@ main {
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
-}
+} */
 
 .contenedorGraficas {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     justify-content: center;
     background-color: white;
@@ -111,7 +175,51 @@ main {
     padding: 20px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
+    /* margin-top: 30px; */
+}
+
+.contenedorGraph {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.contenedorGraph button {
+    align-self: flex-end;
+}
+
+#divScoresContainer button {
+    align-self: flex-end;
+}
+
+.divInsideGraph {
+    width: 100%;
+    height: 60vh;
+}
+
+.contenedorGraficas .btnExit {
+    align-self: flex-end;
+}
+
+.contenedorStatsLogin {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 32px;
+}
+
+.graficaL,
+.graficaF {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 50%;
 }
 
 #graficaResultados {
@@ -259,6 +367,13 @@ main {
     gap: 18px;
 }
 
+#divLogout {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 18px;
+}
+
 #message {
     font-size: small;
     display: inline-block;
@@ -266,6 +381,8 @@ main {
     margin-top: 0;
     margin-bottom: 8.5px;
 }
+
+
 
 .divPopup {
     display: flex;
@@ -292,7 +409,7 @@ main {
     align-items: center;
     background-color: white;
     border-radius: 5px;
-    width: 600px;
+    width: 80%;
     text-align: center;
     gap: 20px;
     padding: 10px;
@@ -394,18 +511,23 @@ main {
 #divStats {
     display: flex;
     flex-direction: row;
-    margin-left: 5px;
+    /* margin-left: 5px; */
     margin-top: 10px;
+    gap: 10px;
 }
 
-#divStats button {
+/* #divStats button {
     margin-right: 10px;
-}
+} */
 
 .contenedorResultados {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    /* justify-content: space-between; */
+    gap: 24px;
+    text-align: center;
     background-color: white;
     border-radius: 15px;
     width: 80%;
@@ -416,10 +538,10 @@ main {
     margin-top: 30px;
 }
 
-#graficaResultados {
+/* #graficaResultados {
     width: 100%;
     height: 450px;
-}
+} */
 
 #contenedorScores {
     flex-direction: column;
@@ -459,6 +581,7 @@ td {
     main {
         display: flex;
         flex-direction: row;
+        justify-content: center;
     }
 
     .contenedorPreguntas{
@@ -513,28 +636,62 @@ td {
         padding: 20px;
     }
 
-    #divLogin {
-        display: flex;
-        flex-direction: column;
+    .contenedorStatsLogin {
+        width: 100%;
     }
 
-    #graficaResultados {
+    #divLogin {
+        display: flex;
         width: 100%;
-        height: 450px;
+    }
+
+
+    #divLogin button {
+        width: 45%;
+    }
+
+    .divInside {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+        border-radius: 5px;
+        width: 60%;
+        text-align: center;
+        gap: 20px;
+        padding: 10px;
+    }
+
+    .btnExit {
+        display: flex;
+        background-color: rgb(28, 168, 224);;
+        border: none;
+        border-radius: 3px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .navResults {
+        display: flex;
+        flex-direction: row;
     }
 }
 
-@media (min-width: 1200px) {
+/* @media (min-width: 1200px) {
 
     main {
         display: flex;
         flex-direction: row;
+        justify-content: center;
+        align-items: center;
     }
 
     .contenedorPreguntas{
         display: flex;
         justify-content: center;
         align-items: center;
+        align-self: center;
+        width: 100%;
     }
 
     .cardPreguntas {
@@ -574,4 +731,4 @@ td {
         padding: 20px;
     }
 
-}
+} */

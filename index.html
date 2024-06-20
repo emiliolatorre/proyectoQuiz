@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
+    <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css"> -->
+    <!-- <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script> -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
@@ -30,8 +32,8 @@
             </article>
         </section>
 
-        <section class="contenedorGraficas">
-            <article>
+        <section id="contenedorNavUser" class="contenedorGraficas">
+            <article class="contenedorStatsLogin">
                 <div id="divLogin">
                     <button id="btnRegister" class="btnRegister">Register</button>
                     <button id="btnLogin" class="btnLogin">Login</button>
@@ -41,16 +43,47 @@
                     </div>
                 </div>
                 <div id="divStats">
-                    <button id="btnPrintGrafica" style="display:none">Ver mi Gráfica</button>
+                    <button id="btnPrintGrafica">Ver mi Gráfica</button>
                     <button id="btnPrintScores" style="display:none">Ver Scores</button>
                 </div>
             </article>
-            <article id="contenedorGraficas" class="contenedorGraficas hidden">
+            <!-- <article id="contenedorGraficas" class="contenedorGraficas hidden">
                 <canvas id="graficaResultados">
 
                 </canvas>
             </article>
-            <article id="contenedorScores" class="hidden"></article>
+            <article id="contenedorScores" class="hidden"></article> -->
+        </section>
+
+        <section>
+            <div id="divGraficasContainer" class="divPopup">
+                <div class="divInside divInsideGraph">
+                    <article id="contenedorGraficas" class="contenedorGraph">
+                        <button id="btnExitRegister" class="btnExit">
+                            <img class="cruz_exit" src="assets\cruz_exit.png" alt="cruz"
+                                style="pointer-events: none;">
+                        </button>
+                        <div class="graficaF">
+                            <canvas id="graficaResultados">
+                            </canvas>
+                        </div>
+                        <div class="graficaL">
+                            <canvas id="graficaResultadosLocal">
+                            </canvas>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div id="divScoresContainer" class="divPopup">
+                <div class="divInside divInsideGraph">
+                    <button id="btnExitRegister" class="btnExit">
+                        <img class="cruz_exit" src="assets\cruz_exit.png" alt="cruz"
+                            style="pointer-events: none;">
+                    </button>
+                    <article id="contenedorScores">
+                    </article>
+                </div>
+            </div>
         </section>
 
 
@@ -88,7 +121,7 @@
                 </div>
 
                 <div id="divLogin-container" class="divPopup">
-                    <div id="divLogin" class="divInside">
+                    <div id="divLogin2" class="divInside">
                         <div class="headExit">
                             <h3 class="titleRegister">Formulario de Login</h3>
                             <button id="btnExitLogin" class="btnExit">
