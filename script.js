@@ -479,6 +479,7 @@ async function getUserResults() {
 
 
     const printScores = (array) => {
+        let rank = 1;
         const tableTitulo = document.createElement('h3');
         tableTitulo.innerHTML = 'TOTAL SCORE RANKING';
 
@@ -506,7 +507,6 @@ async function getUserResults() {
             const score = partida.mejorResultado.scoreJuego;
             const fecha = partida.mejorResultado.fechaJuego;
             const email = partida.email;
-            let rank = 1;
 
             const trScore = document.createElement('tr');
             const tdScore1 = document.createElement('td');
