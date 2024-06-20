@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css"> -->
+    <!-- <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script> -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h2>Quiz</h2>
+        <img class='volumen' src="assets/mute.png">
+    </header>
+    <main id="mainBienvenida">
+        <section class="contenedorBienvenida">
+            <!-- AUTH btn login -->
+            <article class="contenedorTriggerPreguntas">
+                <h3>Welcome to the Quiz!</h3>
+                <a href="/pages/questions.html">
+                    <button class="triggerQuestionsBtn">Take the Quiz</button>
+                </a>
+            </article>
+        </section>
+
+        <section id="contenedorNavUser" class="contenedorGraficas">
+            <article class="contenedorStatsLogin">
+                <div id="divLogin">
+                    <button id="btnRegister" class="btnRegister">Register</button>
+                    <button id="btnLogin" class="btnLogin">Login</button>
+                    <div id="divLogout">
+                        <button id="btnLogout" class="btnLogout">Logout</button>
+                        <p id="message"></p>
+                    </div>
+                </div>
+                <div id="divStats">
+                    <button id="btnPrintGrafica">Ver mi Gráfica</button>
+                    <button id="btnPrintScores" style="display:none">Ver Scores</button>
+                </div>
+            </article>
+            <!-- <article id="contenedorGraficas" class="contenedorGraficas hidden">
+                <canvas id="graficaResultados">
+
+                </canvas>
+            </article>
+            <article id="contenedorScores" class="hidden"></article> -->
+        </section>
+
+        <section>
+            <div id="divGraficasContainer" class="divPopup">
+                <div class="divInside divInsideGraph">
+                    <article id="contenedorGraficas" class="contenedorGraph">
+                        <button id="btnExitRegister" class="btnExit">
+                            <img class="cruz_exit" src="assets\cruz_exit.png" alt="cruz"
+                                style="pointer-events: none;">
+                        </button>
+                        <div class="graficaF">
+                            <canvas id="graficaResultados">
+                            </canvas>
+                        </div>
+                        <div class="graficaL">
+                            <canvas id="graficaResultadosLocal">
+                            </canvas>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div id="divScoresContainer" class="divPopup">
+                <div class="divInside divInsideGraph">
+                    <button id="btnExitRegister" class="btnExit">
+                        <img class="cruz_exit" src="assets\cruz_exit.png" alt="cruz"
+                            style="pointer-events: none;">
+                    </button>
+                    <article id="contenedorScores">
+                    </article>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- AUTH popups login -->
+
+        <section>
+            <div id="forms-container">
+                <div id="divRegister-container" class="divPopup">
+                    <div id="divRegister" class="divInside">
+                        <div class="headExit">
+                            <h3 class="titleRegister">Formulario de Registro</h3>
+                            <button id="btnExitRegister" class="btnExit">
+                                <img class="cruz_exit" src="assets\cruz_exit.png" alt="cruz"
+                                    style="pointer-events: none;">
+                            </button>
+                        </div>
+                        <form id="formRegister" action="#" method="POST">
+                            <div>
+                                <div class="inputContainer">
+                                    <i class="fa fa-envelope icon"></i>
+                                    <input type="email" id="email" class="inputField" name="email" placeholder="Introduce email...">
+                                </div>
+                                <div class="inputContainer">
+                                    <i class="fa fa-key icon"></i>
+                                    <input type="password" id="pass" class="inputField" name="pass" placeholder="Introduce password...">
+                                </div>
+                                <div class="inputContainer">
+                                    <i class="fa fa-key icon"></i>
+                                    <input type="password" id="pass2" class="inputField" name="pass2" placeholder="Repite password...">
+                                </div>
+                                <input type="submit" value="Enviar">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="divLogin-container" class="divPopup">
+                    <div id="divLogin2" class="divInside">
+                        <div class="headExit">
+                            <h3 class="titleRegister">Formulario de Login</h3>
+                            <button id="btnExitLogin" class="btnExit">
+                                <img class="cruz_exit" src="assets\cruz_exit.png" alt="cruz"
+                                    style="pointer-events: none;">
+                            </button>
+                        </div>
+                        <form id="formLogin" action="#" method="POST">
+                            <div class="inputContainer">
+                                <i class="fa fa-envelope icon"></i>
+                                <input type="email" id="email2" class="inputField" name="email2" placeholder="Introduce email...">
+                            </div>
+                            <div class="inputContainer">
+                                <i class="fa fa-key icon"></i>
+                                <input type="password" id="pass3" class="inputField" name="pass3" placeholder="Introduce password...">
+                            </div>
+                            <input type="submit" value="Enviar">
+                        </form>
+                        <button id="btnGoogle" onclick="loginGoogle()">Login with Google</button>
+                        <a href="#" id="linkRegister">¿Aún no tienes cuenta?</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+    </main>
+    <footer></footer>
+    <audio class="musicaFondo" loop>
+        <source src="assets/musicaPagina.mp3" type="audio/mpeg">
+    </audio>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
