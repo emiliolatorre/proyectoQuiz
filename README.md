@@ -7,10 +7,15 @@ También permite ver los resultados y los gráficos de rendimiento, se utiliza e
 ### Mobile First
 Puesto que en la actualidad es tan importante, el uso de los aplicativos en móviles, nuestra aplicación se adapta a los diferentes tamaños de pantalla tanto para pantallas de móviles como de ordenadores de sobre mesa, como podemos observar en las siguientes imágenes:
 - **Vista movil**:
+
 ![Vista movil](/assets/vistamovil.PNG "Vista movil página inicial")
+
 - **Vista IPad**:
+
 ![Vista movil](/assets/vustatablet.PNG "Vista movil página inicial")
+
 - **Vista Desktop**:
+
 ![Vista movil](/assets/vistadt.PNG "Vista movil página inicial")
 ### Tecnologias usadas
 - HTML.
@@ -28,7 +33,7 @@ Puesto que en la actualidad es tan importante, el uso de los aplicativos en móv
 - ✅ Uso de Firebase Firestore para los datos de partida de usuarios que han realizado el login.
 - ✅ Implementación Firebase Authentication con metodos de acceso (Email-contraseña / Google).
 - ✅ Gestión de proyecto con GitHub, uso de ramas, fork y pull request.
-- :marca_de_verificación_gruesa: Despliegue en Github Pages.
+- ✅ Despliegue en Netlify.
 ### Organizacion
 - Manejo de Trello
 ![Uso de Trello](/assets/trello.jpeg "Uso de Trello")
@@ -41,7 +46,7 @@ Puesto que en la actualidad es tan importante, el uso de los aplicativos en móv
 #### Vista pagina resultados
 ![Diseño producto página resultados](/assets/vistaindex%20(3).jpeg "Diseño producto página resultados")
 ### Uso
-1. [Ingresa aqui para empezar a jugar](http://mipaes7.github.io/proyectoQuiz/)
+1. [Ingresa aqui para empezar a jugar](https://proyectoquiz.netlify.app/)
 2. Regístrate o inicia sesión.
 3. Comienza el Quiz.
 4. Responde las preguntas que se van presentando.
