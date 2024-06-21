@@ -1,6 +1,8 @@
 ![logotipo de The Bridge](https://user-images.githubusercontent.com/27650532/77754601-e8365180-702b-11ea-8bed-5bc14a43f869.png "logotipo de The Bridge")
 # Proyecto Quiz
+
 [TOC]
+
 ### Descripcion del Proyecto
 Este es un proyecto es una aplicación web interactiva de Quiz, este proyecto permite a los usuarios registrarse, iniciar sesión, y responder preguntas aleatorias sobre diversos temas.
 También permite ver los resultados y los gráficos de rendimiento, se utiliza el FireBase, para la autenticación y el almacenamiento de los datos
@@ -25,16 +27,15 @@ Puesto que en la actualidad es tan importante, el uso de los aplicativos en móv
 - CHART.JS
 - FIREBASE. Modulos Auth y Firestore.
 ### Objetivos
-- ✅ Se logró la obtención de 10 preguntas aleatorias del [links](www.opentdb.com) mediante el uso de asincronía Fetch.
-- ✅ Vista dinámica de preguntas en el DOM.
-- ✅ Diseño mobile-first de la aplicación.
-- ✅ Single page  para la vista dinamica de la pregunta.
-- ✅ Uso de local storage para los datos de partida de usuarios que no han realizado el login.
-- ✅ Implementacion de grafica con la librería Chart.js
-- ✅ Uso de Firebase Firestore para los datos de partida de usuarios que han realizado el login.
-- ✅ Implementación Firebase Authentication con metodos de acceso (Email-contraseña / Google).
-- ✅ Gestión de proyecto con GitHub, uso de ramas, fork y pull request.
-- ✅ Despliegue en Netlify.
+✅ Diseño del Front: diseño responsive, mobile first, semántica HTML5
+✅ Manipulación del DOM: vista dinámica de preguntas en el DOM, en SPA.
+✅ Asincronía: obtención de 10 preguntas aleatorias de la API www.opentdb.com
+✅ Local Storage: guardado de cada partida y fecha de users no logeados en LS
+✅ Firebase Firestore: almacenamiento de partidas de usuarios autenticados.
+✅ Firebase Auth: implementación de metodos de acceso Email-contraseña / Google.
+✅ Gráfica y Tabla: implementacion de grafica con la librería Chart.js y tabla Scores
+✅ Github: gestión de proyecto con GitHub, uso de ramas, fork y pull request.
+✅ Despliegue: Netlify
 ### Organizacion
 - Manejo de Trello
 ![Uso de Trello](/assets/trello.jpeg "Uso de Trello")
