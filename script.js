@@ -250,6 +250,9 @@ document.addEventListener('DOMContentLoaded', () => {
             let pass2 = event.target.elements.pass2.value;
             pass === pass2 ? signUpUser(email, pass) : alert("error password");
         });
+        document.getElementById("btnGoogle").addEventListener('click', () => {
+            loginGoogle();
+        });
     }
 
     const createUser = (user) => {

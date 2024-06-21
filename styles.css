@@ -110,6 +110,10 @@ main {
     gap: 8px;
 }
 
+#btnGoogle {
+    width: 50px;
+}
+
 .triggerQuestionsBtn,
 .btnRegister,
 .btnLogin,
