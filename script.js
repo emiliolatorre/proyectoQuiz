@@ -32,8 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const grafica = document.getElementById('graficaResultados');
     const graficaLocal = document.getElementById('graficaResultadosLocal');
     let resultsLocal = JSON.parse(localStorage.getItem('resultados')) || [];
-    const rightAudio = new Audio('assets/RightAudio.ogg');
-    const wrongAudio = new Audio('assets/WrongAudio.ogg');
     // variables para guardar resultados
     let questionsArrayGlobal;
     let iteratingIndex = 0;
@@ -44,12 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     let resultados = [];
     //EVENTOS
-    document.addEventListener('DOMContentLoad', () => {
-    });
-    document.addEventListener('click', ({ target }) => {
-        if (target.matches('.optionBtn')) {
+    document.addEventListener('click', (event) => {
+        if (event.target.matches('.optionBtn')) {
             // const valueOption = target.value;
-            validarRespuestaCorrecta(target);
+            validarRespuestaCorrecta(event.target);
             setTimeout(() => {
                 clearComponent(contenedorPreguntas);
                 pintarQuestions(questionsArrayGlobal, iteratingIndex + 1);
@@ -60,8 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     pushResultsToLocal(resultPerGameObj);
                     console.log(resultPerGameObj);
                 }
-            }, "1000")
+            }, 1000)
         }
+
     });
     //FUNCIONES
     const getQuestions = async () => {
@@ -89,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clearComponent(contenedorPreguntas);
             const resultsLink = document.createElement('a');
             const goToResultsBtn = document.createElement('button');
+            resultsLink.classList.add('goResultsLink');
             goToResultsBtn.classList.add('goToResultsBtn');
             resultsLink.href = 'results.html';
             resultsLink.append(goToResultsBtn);
@@ -136,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const goToIndexgBtn = document.createElement('button');
         score.textContent = `${results[results.length - 1].scoreJuego}/10`;
         questionsLink.href = 'questions.html';
+        questionsLink.classList.add('questionsTrigger');
         playAgaingBtn.textContent = 'Play Again!';
         indexLink.href = '/index.html';
         goToIndexgBtn.textContent = 'Home';
@@ -365,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // contenedorScores.classList.add('show');
                         divScoresContainer.classList.add('show');
                         getAllBestResults().then((results) => {
-                            contenedorScores.innerHTML= '';
+                            contenedorScores.innerHTML = '';
                             contenedorScores.classList.remove('hidden');
                             console.log(results);
                             printScores(results)
