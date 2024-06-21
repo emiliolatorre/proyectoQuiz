@@ -1,7 +1,19 @@
 ![logotipo de The Bridge](https://user-images.githubusercontent.com/27650532/77754601-e8365180-702b-11ea-8bed-5bc14a43f869.png "logotipo de The Bridge")
 # Proyecto Quiz
 
-[TOC]
+## Table of Contents
+- [Descripcion del Proyecto](#descripcion-del-proyecto)
+- [Mobile First](#mobile-first)
+- [Tecnologias usadas](#tecnologias-usadas)
+- [Objetivos](#objetivos)
+- [Organizacion](#organizacion)
+- [Diseño de producto](#diseño-de-producto)
+- [Uso](#uso)
+- [Caracteristicas](#caracteristicas)
+- [Estructura del proyecto](#estructura-del-proyecto)
+- [Funciones principales](#funciones-principales)
+- [Contribución](#contribución)
+- [Colaboradores](#colaboradores)
 
 ### Descripcion del Proyecto
 Este es un proyecto es una aplicación web interactiva de Quiz, este proyecto permite a los usuarios registrarse, iniciar sesión, y responder preguntas aleatorias sobre diversos temas.
