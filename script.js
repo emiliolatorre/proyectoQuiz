@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.matches('.optionBtn')) {
             // const valueOption = target.value;
             validarRespuestaCorrecta(event.target);
+            document.querySelectorAll('.optionBtn').forEach(element => {
+                element.setAttribute('disabled', true);
+            });
             setTimeout(() => {
                 clearComponent(contenedorPreguntas);
                 pintarQuestions(questionsArrayGlobal, iteratingIndex + 1);
@@ -136,7 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
         questionsLink.href = 'questions.html';
         questionsLink.classList.add('questionsTrigger');
         playAgaingBtn.textContent = 'Play Again!';
-        indexLink.href = '/index.html';
+        indexLink.href = '../index.html';
+        // indexLink.href = '/index.html';
         goToIndexgBtn.textContent = 'Home';
         btnsContainer.classList.add('navResults');
         questionsLink.append(playAgaingBtn);
