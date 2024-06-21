@@ -64,6 +64,7 @@ Puesto que en la actualidad es tan importante, el uso de los aplicativos en móv
 ### Vista pagina resultados
 ![Diseño producto página resultados](/assets/vistaindex%20(3).jpeg "Diseño producto página resultados")
 ## Uso
+
 1. [Ingresa aqui para empezar a jugar](https://mipaes7.github.io/proyectoQuiz/)
 2. Regístrate o inicia sesión.
 3. Comienza el Quiz.
