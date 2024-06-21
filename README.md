@@ -6,6 +6,7 @@ Este es un proyecto es una aplicación web interactiva de Quiz, este proyecto pe
 También permite ver los resultados y los gráficos de rendimiento, se utiliza el FireBase, para la autenticación y el almacenamiento de los datos
 ### Mobile First
 Puesto que en la actualidad es tan importante, el uso de los aplicativos en móviles, nuestra aplicación se adapta a los diferentes tamaños de pantalla tanto para pantallas de móviles como de ordenadores de sobre mesa, como podemos observar en las siguientes imágenes:
+
 - **Vista movil**:
 
 ![Vista movil](/assets/vistamovil.PNG "Vista movil página inicial")
