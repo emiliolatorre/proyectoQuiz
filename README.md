@@ -15,10 +15,10 @@
 - [Contribución](#contribución)
 - [Colaboradores](#colaboradores)
 
-### Descripcion del Proyecto
+## Descripcion del Proyecto
 Este es un proyecto es una aplicación web interactiva de Quiz, este proyecto permite a los usuarios registrarse, iniciar sesión, y responder preguntas aleatorias sobre diversos temas.
 También permite ver los resultados y los gráficos de rendimiento, se utiliza el FireBase, para la autenticación y el almacenamiento de los datos
-### Mobile First
+## Mobile First
 Puesto que en la actualidad es tan importante, el uso de los aplicativos en móviles, nuestra aplicación se adapta a los diferentes tamaños de pantalla tanto para pantallas de móviles como de ordenadores de sobre mesa, como podemos observar en las siguientes imágenes:
 
 - **Vista movil**:
@@ -32,23 +32,23 @@ Puesto que en la actualidad es tan importante, el uso de los aplicativos en móv
 - **Vista Desktop**:
 
 ![Vista movil](/assets/vistadt.PNG "Vista movil página inicial")
-### Tecnologias usadas
+## Tecnologias usadas
 - HTML.
 - CSS.
 - JAVASCRIPT.
 - CHART.JS
 - FIREBASE. Modulos Auth y Firestore.
-### Objetivos
-✅ Diseño del Front: diseño responsive, mobile first, semántica HTML5
-✅ Manipulación del DOM: vista dinámica de preguntas en el DOM, en SPA.
-✅ Asincronía: obtención de 10 preguntas aleatorias de la API www.opentdb.com
-✅ Local Storage: guardado de cada partida y fecha de users no logeados en LS
-✅ Firebase Firestore: almacenamiento de partidas de usuarios autenticados.
-✅ Firebase Auth: implementación de metodos de acceso Email-contraseña / Google.
-✅ Gráfica y Tabla: implementacion de grafica con la librería Chart.js y tabla Scores
-✅ Github: gestión de proyecto con GitHub, uso de ramas, fork y pull request.
-✅ Despliegue: Netlify
-### Organizacion
+## Objetivos
+- ✅ **Diseño del Front:** diseño responsive, mobile first, semántica HTML5
+- ✅ **Manipulación del DOM:** vista dinámica de preguntas en el DOM, en SPA.
+- ✅ **Asincronía:** obtención de 10 preguntas aleatorias de la API www.opentdb.com
+- ✅ **Local Storage:** guardado de cada partida y fecha de users no logeados en LS
+- ✅ **Firebase Firestore:** almacenamiento de partidas de usuarios autenticados.
+- ✅ **Firebase Auth:** implementación de metodos de acceso Email-contraseña / Google.
+- ✅ **Gráfica y Tabla:** implementacion de grafica con la librería Chart.js y tabla Scores
+- ✅ **Github:** gestión de proyecto con GitHub, uso de ramas, fork y pull request.
+- ✅ **Despliegue:** Despliegue en Github Pages.
+## Organizacion
 - Manejo de Trello
 
 ![Uso de Trello](/assets/trello.jpeg "Uso de Trello")
@@ -56,20 +56,20 @@ Puesto que en la actualidad es tan importante, el uso de los aplicativos en móv
 - Uso de Ramas en GitHub
 
 ![Uso de Ramas](/assets/ManejoRamas.png "Uso de Ramas")
-### Diseño de producto
-#### Vista página bienvenida
+## Diseño de producto
+### Vista página bienvenida
 ![Diseño producto página bienvenida](/assets/vistaindex%20(1).jpeg "Diseño producto página bienvenida")
-#### Vista página preguntas
+### Vista página preguntas
 ![Diseño producto página preguntas](/assets/vistaindex%20(2).jpeg "Diseño producto página preguntas")
-#### Vista pagina resultados
+### Vista pagina resultados
 ![Diseño producto página resultados](/assets/vistaindex%20(3).jpeg "Diseño producto página resultados")
-### Uso
-1. [Ingresa aqui para empezar a jugar](https://proyectoquiz.netlify.app/)
+## Uso
+1. [Ingresa aqui para empezar a jugar](https://mipaes7.github.io/proyectoQuiz/)
 2. Regístrate o inicia sesión.
 3. Comienza el Quiz.
 4. Responde las preguntas que se van presentando.
 5. Al finalizar de responder las preguntas, revisa tus resultados y los gráficos de rendimiento.
-### Caracteristicas
+## Caracteristicas
 En una primera pantalla, se muestra la alternativa de realizar el Quiz, sin tener suscribirse, esta alternativa no te da la opcion de ver la grafica de resultados, a diferencia de si nos registramos.
 ![Vista movil](/assets/vustatablet.PNG "Vista movil página inicial")
 Una vez en el Quiz, realizamos una petición a la Api, la que a traves de un fetch desde JavaScript, nos proporciona un listado de 10 preguntas aleatorias, las cuales con los algoritmos realizados, nos da la alternativa de que el usuario puede seleccionar la respuesta correcta, una vez elegida la respuesta, se pintara la correcta de color verde y las incorrectas de color rojo, para que el usuario pueda ver cual es la respuesta correcta.
@@ -80,25 +80,25 @@ Una vez respondidas las diez preguntas, el usuario deberá, dar click al boton d
 ![Vista movil](/assets/vistabtnresults.PNG "Vista movil página inicial")
 ![Vista movil](/assets/vistaresults.PNG "Vista movil página inicial")
 Tambien desde esta vista, tienes la posibilidad de acceder nuevamente a otro Quiz, para asi poder obtener el mejor puntaje acumulado.
-### Estructura del proyecto
+## Estructura del proyecto
 - **index.html**: Página principal de la aplicación.
 - **script.js**: Script principal que maneja la lógica del Quiz, autenticación y almacenamiento de los resultados.
 - **style.css**: Estilos para la aplicación.
 - **assets/**: Contiene los archivos multimedia, como los sonidos y la música de fondo.
 - **pages/**: Contiene las páginas adicionales como resultados y el área de las preguntas.
-### Funciones principales
+## Funciones principales
 - **Autenticación**: Registro, inicio y cierre de sesión de usuarios usando Firebase.
 - **Quiz**: Obtención de preguntas desde la Open Trivia Database API, renderizado de manera renderizada y dinámica.
 - **Resultados**: Almacenamiento de resultados en Firebase y LocalStorage y visualización de resultados.
 - **Gráficos**: Generación de gráficos de rendimiento con Chart.js.
-### Contribución
+## Contribución
 Si deseas contribuir a este proyecto, por favor sigue los siguientes pasos:
 - Haz un fork del repositorio.
 - Crea una nueva rama (git checkout -b nueva-rama).
 - Realiza tus cambios y haz commit (git commit -am 'Agrega nueva característica').
 - Sube tus cambios a la rama (git push origin nueva-caracteristica).
 - Abre un Pull Request.
-### Colaboradores
+## Colaboradores
 Los colaboradores de este proyecto somos Miguel Pardal, Emilio Latorre y Stephani Damiani, estudiantes de Full Stack.
 - [Miguel Pardal GitHub](https://github.com/mipaes7)
 - [Emilio Latorre  GitHub](https://github.com/emiliolatorre)

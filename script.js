@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const volumen = document.querySelector('.volumen');
     const musicaFondo = document.querySelector('.musicaFondo');
-    // musicaFondo.play();
+    musicaFondo.play();
     // Your web app's Firebase configuration
     const firebaseConfig = {
         apiKey: "AIzaSyAuLH-B5suV6RhxfnuTiEGwZkXW4aGSVz8",
