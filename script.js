@@ -581,8 +581,18 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.volumen').classList.add('musicoff');
         }
     });
-    getQuestions();
-    pintarResults();
-    pintarQuestions();
-    // pintarGraficaResults();
+    // getQuestions();
+    // pintarResults();
+    // pintarQuestions();
+
+    const handlePageLoad = () => {
+        const path = window.location.pathname;
+        if (path.includes('questions.html')) {
+            getQuestions();
+        } else if (path.includes('results.html')) {
+            pintarResults();
+        }
+    };
+
+    handlePageLoad();
 });
