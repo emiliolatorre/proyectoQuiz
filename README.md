@@ -47,7 +47,7 @@ Puesto que en la actualidad es tan importante, el uso de los aplicativos en móv
 - ✅ **Firebase Auth:** implementación de metodos de acceso Email-contraseña / Google.
 - ✅ **Gráfica y Tabla:** implementacion de grafica con la librería Chart.js y tabla Scores
 - ✅ **Github:** gestión de proyecto con GitHub, uso de ramas, fork y pull request.
-- ✅ **Despliegue:** Netlify
+- ✅ **Despliegue:** Despliegue en Github Pages.
 ## Organizacion
 - Manejo de Trello
 
@@ -64,7 +64,8 @@ Puesto que en la actualidad es tan importante, el uso de los aplicativos en móv
 ### Vista pagina resultados
 ![Diseño producto página resultados](/assets/vistaindex%20(3).jpeg "Diseño producto página resultados")
 ## Uso
-1. [Ingresa aqui para empezar a jugar](https://proyectoquiz.netlify.app/)
+
+1. [Ingresa aqui para empezar a jugar](https://mipaes7.github.io/proyectoQuiz/)
 2. Regístrate o inicia sesión.
 3. Comienza el Quiz.
 4. Responde las preguntas que se van presentando.
