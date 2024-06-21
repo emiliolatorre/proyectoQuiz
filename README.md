@@ -50,8 +50,11 @@ Puesto que en la actualidad es tan importante, el uso de los aplicativos en móv
 - ✅ **Despliegue:** Netlify
 ## Organizacion
 - Manejo de Trello
+
 ![Uso de Trello](/assets/trello.jpeg "Uso de Trello")
+
 - Uso de Ramas en GitHub
+
 ![Uso de Ramas](/assets/ManejoRamas.png "Uso de Ramas")
 ## Diseño de producto
 ### Vista página bienvenida
