@@ -40,6 +40,7 @@ Puesto que en la actualidad es tan importante, el uso de los aplicativos en móv
 - Manejo de Trello
 ![Uso de Trello](/assets/trello.jpeg "Uso de Trello")
 - Uso de Ramas en GitHub
+![Uso de Ramas](/assets/ManejoRamas.png "Uso de Ramas")
 ### Diseño de producto
 #### Vista página bienvenida
 ![Diseño producto página bienvenida](/assets/vistaindex%20(1).jpeg "Diseño producto página bienvenida")
